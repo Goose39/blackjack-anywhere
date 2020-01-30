@@ -7,7 +7,6 @@ export default function PlayerBoxes(props) {
   const boxes = props.boxes.map((box, i) => {
     const boxNo = i + 1;
     const cards = box.cards ? box.cards : undefined;
-    console.log("PlayerBoxes Cards:", cards)
     return <PlayerBox 
             key={`box-${boxNo}`} 
             boxId={boxNo} 
@@ -15,6 +14,8 @@ export default function PlayerBoxes(props) {
             bet={box.bet}
             result={box.result}
             handStarted={props.handStarted}
+            open={box.open}
+            active={box.active}
           />
   })
   return (

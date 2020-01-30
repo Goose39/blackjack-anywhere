@@ -6,28 +6,31 @@ import './BetControls.css'
 export default class BetControls extends React.Component {
   static contextType = TableContext;
   render () {
+    const chips = [{
+      value: 25,
+      color: 'blue'
+      }, 
+      {
+      value: 100, 
+      color: 'black'
+      }, 
+      {
+      value: 1000,
+      color: 'pink'
+      }, 
+      {
+      value: 10000,
+      color: 'red'
+      },
+      {
+      value: 100000,
+      color: 'red'
+      }];
     const balance = this.context.balance;
     const boxBet = this.context.playerBoxes[this.props.boxId-1].bet
     const betsOnTable = this.context.playerBoxes? this.context.playerBoxes.map(box => box.bet): [];
     const bigBetOnTable = betsOnTable !== []? Math.max(...betsOnTable): 0;
     let disableButtonCheck = false;
-    const chips = [{
-                    value: 25,
-                    color: 'blue'
-                    }, 
-                    {
-                    value: 100, 
-                    color: 'black'
-                    }, 
-                    {
-                    value: 1000,
-                    color: 'pink'
-                    }, 
-                    {
-                    value: 10000,
-                    color: 'red'
-                    }];
-
     const controls = chips.map((chip) => {
       if (boxBet === 0 || chip.value > boxBet) {
         disableButtonCheck = true;

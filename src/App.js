@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import './App.css';
-import { CreateShoe } from './store';
+import { CreateShoe, HandTotal } from './store';
 import Welcome from './Welcome/Welcome'
 import TableContext from './TableContext';
 import Table from './Table/Table';
@@ -34,7 +34,8 @@ class App extends React.Component {
         double: false, 
         insurance: false,
         stand: null, 
-        result: ""
+        result: "",
+        active: false
       },
       {
         id: 2,
@@ -48,7 +49,8 @@ class App extends React.Component {
         double: false, 
         insurance: false,
         stand: null,
-        result: ""
+        result: "",
+        active: false
       },
       {
         id: 3,
@@ -62,7 +64,8 @@ class App extends React.Component {
         double: false, 
         insurance: false,
         stand: null,
-        result: ""
+        result: "",
+        active: false
       },
       {
         id: 4,
@@ -76,7 +79,8 @@ class App extends React.Component {
         double: false, 
         insurance: false, 
         stand: null,
-        result: ""
+        result: "",
+        active: false
       },
       {
         id: 5,
@@ -90,7 +94,8 @@ class App extends React.Component {
         double: false, 
         insurance: false, 
         stand: null,
-        result: ""
+        result: "",
+        active: false
       }
     ],
     error: null,
@@ -123,10 +128,12 @@ class App extends React.Component {
   stand = (boxIndex) => {
     const updatedPlayerBoxes = [ ...this.state.playerBoxes ];
     updatedPlayerBoxes[boxIndex].stand = true;
-    this.setActiveBox(boxIndex + 2)
+    updatedPlayerBoxes[boxIndex].active = false;
+
+    this.setActiveBox(boxIndex + 1)
     //update state to reflect that player STANDS on a given box and no more cards should be dealt to that box.
     this.setState ({
-      playerBoxes: updatedPlayerBoxes
+      playerBoxes: updatedPlayerBoxes, 
     })
   }
 
@@ -145,8 +152,8 @@ class App extends React.Component {
       const updatedPlayerBoxes = playerBoxes.map(box => {
         if (box.open) {
           updatedOpenBoxes.push(box.id)
-         // const nextCard = this.getNextCard()
-         const nextCard = newShoe.shift();
+          // const nextCard = this.getNextCard()
+          const nextCard = newShoe.shift();
           box.cards.push(nextCard)
         } 
         return box
@@ -207,10 +214,18 @@ class App extends React.Component {
   }
 
   setActiveBox = (boxIndex) => {   
-    // if () 
-    this.setState ({
-      activeBox: {id: boxIndex}
-    })
+    const updatedPlayerBoxes = [...this.state.playerBoxes]
+
+    if (boxIndex <= 4) {
+      if ((updatedPlayerBoxes[boxIndex].open) && !(updatedPlayerBoxes[boxIndex].stand)) {
+        updatedPlayerBoxes[boxIndex].active = true;
+        this.setState ({
+          activeBox: { id: boxIndex + 1 },
+          playerBoxes: updatedPlayerBoxes
+        })
+      }
+    } else this.endHand()
+
   }
 
   addBetHandler = (boxId, bet) => {
@@ -249,6 +264,28 @@ class App extends React.Component {
       playerBoxes: updatedPlayerBoxes,
       balance: UpdatedBalance
     })
+  }
+
+  resultDealerHand= () => {
+    const dealerBox = {...this.state.dealerBox};
+    let cards = dealerBox.cards
+    let handTotal = HandTotal(cards)
+    const newShoe = [...this.state.shoe];
+    
+
+    while (handTotal <= 17) {
+      const nextCard = newShoe.shift();
+      dealerBox.cards.push(nextCard)
+      handTotal = HandTotal(cards)
+    }
+    this.setState({
+      dealerBox 
+    })
+  }
+
+  endHand = () => {
+    this.resultDealerHand();
+    // this.payout();
   }
 
   render() {

@@ -1,0 +1,21 @@
+.box {
+
+}
+
+#box-0 {
+  text-align: center;
+}
+
+#box-3 {
+  margin-top: 100px;
+}
+
+#box-2, #box-4 {
+  margin-top: 75px;
+  display: none;
+}
+
+#box-1, #box-5 {
+  margin-top: 30px;
+  display: none;
+}

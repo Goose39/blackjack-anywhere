@@ -85,53 +85,16 @@ p + p {
   justify-content: space-around;
 }
 
-.bets {
+.bet {
   width: 100px;
   height: 100px;
   border: rgb(255, 255, 255) 5px solid;
   line-height: 100px;
   border-radius: 100%;
-  
 }
 
-.box {
-  
-}
-
-#box-0 {
-  text-align: center;
-}
-
-#box-3 {
-  margin-top: 100px;
-}
-
-#box-2, #box-4 {
-  margin-top: 75px;
-  display: none;
-}
-
-#box-1, #box-5 {
-  margin-top: 30px;
-  display: none;
-}
-
-/* .card-inner {
-  height: 65%;
-  width: 65%;
-  position: relative;
-  border: rgb(102, 100, 100) 1px solid;
-  border-radius: 10px;
-  display: inline-block;
-} */
-
-.suit {
-
-}
-
-.suit-img {
-  width: 10px;
-  height: 10px;
+.hidden {
+  visibility: hidden;
 }
 
 .hand-count {

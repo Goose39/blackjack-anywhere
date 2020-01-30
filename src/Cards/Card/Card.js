@@ -16,7 +16,7 @@ export default function Card(props) {
 
   const cardClass = ((props.id > 1) ? " card": "")
   const srcIdx = imageStore.findIndex(x => x.id === props.suit);
- 
+  // const backgroundImageStyle = imageStore[srcIdx].src;
   return (
     <div className={`card-${props.id} front-card-outer${cardClass}`}>
       <div className="card-value-box">
@@ -25,7 +25,7 @@ export default function Card(props) {
           <img className="suit-img" src={imageStore[srcIdx].src} alt={imageStore[srcIdx].alt} />
         </div>
       </div>
-      <div className="card-inner"></div>
+      <div className="card-inner" style={{ backgroundImage: `url(${imageStore[srcIdx].src})` }}></div>
     </div>
   );
 }

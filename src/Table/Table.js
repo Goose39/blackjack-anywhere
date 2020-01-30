@@ -5,7 +5,6 @@ import PlayerBoxes from '../PlayerBoxes/PlayerBoxes';
 import PlayerControls from '../PlayerControls/PlayerControls';
 
 export default function Table(props) {
-  console.log("DealerProps passed to DelaerBox", props.dealerBox)
   return (
   <>  
     <TableHeader user={props.user} balance={props.balance}/>

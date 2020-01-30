@@ -2,7 +2,6 @@
   margin-left: -50px;
 }
 
-
 .front-card-outer {
   height: 100px;
   width: 70px;
@@ -29,10 +28,22 @@
   top: 8px;
 }
 
+.card-inner {
+  height: 85%;
+  width: 65%;
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-position-x: left top;
+}
+
 .card-value-box {
   display: flex;
   flex-direction: column;
   position: relative;
   top: -37px;
-  left: -25px;
+}
+
+.suit-img {
+  width: 10px;
+  height: 10px;
 }
