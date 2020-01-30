@@ -1,0 +1,12 @@
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.action {
+  font-size: 18px;
+  padding: 8px;
+  width: 80%;
+  max-width: 250px;
+  margin: 5px auto;
+}

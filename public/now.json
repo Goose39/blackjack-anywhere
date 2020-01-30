@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "alias": "https://build.goose39dev.now.sh",
+  "name": "blackjack-anywhere",
+  "routes": [
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.html" }
+  ]
+}

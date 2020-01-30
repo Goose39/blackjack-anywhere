@@ -1,0 +1,38 @@
+.card {
+  margin-left: -50px;
+}
+
+
+.front-card-outer {
+  height: 100px;
+  width: 70px;
+  border-radius: 10px;
+  background-color: white;
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px black solid;
+}
+
+.back-card-outer {
+  height: 100px;
+  width: 70px;
+  border-radius: 10px;
+  background-color: rgb(102, 100, 100);
+  display: inline-block;
+  position: relative;
+}
+
+.card-value {
+  position: relative;
+  top: 8px;
+}
+
+.card-value-box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -37px;
+  left: -25px;
+}
