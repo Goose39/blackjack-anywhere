@@ -42,7 +42,7 @@ export const HandTotal = (cards) => {
       const cardValue = cardValues.find(card => card.symbol === cardSymbol)
       return cardValue.value
       }) 
-    : null;
+    : undefined;
 
   const sum = totals ? totals.reduce(( a, b ) => a + b): 0;
   return sum

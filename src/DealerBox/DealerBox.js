@@ -3,7 +3,7 @@ import Cards from '../Cards/Cards'
 
 export default function HandCount(props) {
   const result = props.box.result? props.box.result: null;
-  const cards = props.box.cards ? <Cards cards={props.box.cards}/> : null
+  const cards = props.box.cards ? <Cards cards={props.box.cards} boxId={"dealer"}/> : null
   return (
     <section className="dealer-section">
     <div id="box-0" className="box">

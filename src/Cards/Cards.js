@@ -15,7 +15,7 @@ export default function Cards(props) {
 
   return (
     <>
-      { cards ? <HandCount cards={props.cards}/> : null}
+      { cards.length > 1 ? <HandCount cards={props.cards}/> : null}
       <div className={`cards${props.active? ' active': ''}`}>
         { cards }
       </div>
