@@ -1,10 +1,28 @@
-import React from 'react'
-import Cards from '../Cards/Cards'
-import './DealerBox.css'
+import React from 'react';
+import Cards from '../Cards/Cards';
+import Card from '../Cards/Card/Card';
+import './DealerBox.css';
 
-export default function HandCount(props) {
+export default function DealerBox(props) {
   const result = props.box.result? props.box.result: null;
-  const cards = props.box.cards ? <Cards cards={props.box.cards} boxId={"dealer"}/> : null
+
+  let cards = []
+  if (props.box.cards)  {
+    if (props.box.cards.length === 2 && props.hideCard) {
+      const card = props.box.cards[0]
+      const value = card.slice(0,-1)
+      const suit = card.slice(-1)
+      cards.push(
+        <div className={`cards`}>
+          <Card key={`box-dealer_card-1`} value={value} suit={suit} boxId={"dealer"}/>
+          <div className={`card-${props.id} back-card-outer card`}></div>
+        </div>
+      )
+    } else {
+        cards.push(<Cards cards={props.box.cards} boxId={"dealer"}/>)
+      }
+    }   
+
   return (
     <section className="dealer-section">
     <div id="box-0" className="box">
