@@ -13,7 +13,7 @@ export default function Cards(props) {
       const cardId = i + 1;
       const value = card.slice(0,-1)
       const suit = card.slice(-1)
-      return <Card key={`box-${props.boxId}_card-${cardId}`} id={i+1} value={value} suit={suit}/>
+      return <Card key={`box-${props.boxId}_card-${cardId}`} id={i+1} value={value} suit={suit} boxId={props.boxId}/>
     }) 
     : null;
 
