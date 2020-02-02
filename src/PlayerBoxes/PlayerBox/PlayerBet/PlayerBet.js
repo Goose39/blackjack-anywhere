@@ -1,4 +1,5 @@
 import React from 'react'
+import './PlayerBet.css'
 
 export default function PlayerBet(props) {
   let betBox = null
@@ -25,8 +26,3 @@ export default function PlayerBet(props) {
   </>
   )
 }
-
-{/* <div className="bet">
-{props.bet > 0? `$${props.bet}`: "Place Bet"}
-</div>
- */}

@@ -4,7 +4,7 @@ import './PlayerBoxes.css';
 
 
 export default function PlayerBoxes(props) {
-  const boxes = props.boxes[0] != undefined ? props.boxes.map((box, i) => {
+  const boxes = props.boxes[0] !== undefined ? props.boxes.map((box, i) => {
     const boxNo = i + 1;
     const cards = box.cards ? box.cards : undefined;
     return <PlayerBox 

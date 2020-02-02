@@ -1,5 +1,6 @@
 import React from 'react'
 import { HandTotal } from '../../store'
+import './HandCount.css'
 
 export default function HandCount(props) {
 

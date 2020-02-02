@@ -1,8 +1,9 @@
 .cards {
   display: flex;  
   padding: 5px;
+  min-height: 120px;
 }
 
-.card .active {
+.active_cards {
   background-color: rgb(6, 190, 247);
 }

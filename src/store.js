@@ -7,12 +7,25 @@ export const CreateShoe = (decks) => {
   for (let i=1; i <= decks; i++) {
     shoe.push(deck);
   }
- 
+  
   return shoe.flat();
 }
 
-export const randomizeShoe = () => {
+const randNo = (max) => {
+  return Math.floor(Math.random() * Math.floor(max));
+ }
 
+export const shuffle = (shoe) => {
+  let newShoe = []
+  while (shoe.length > 0)
+  {
+    const shoeSize = shoe.length 
+    const randCardLocation = randNo(shoeSize);
+    newShoe.push(shoe[randCardLocation]);
+    shoe.splice(randCardLocation, 1);
+  }
+
+  return newShoe
 }
 
 export const sliceCard = (card) => {
@@ -47,5 +60,4 @@ export const HandTotal = (cards) => {
   const sum = totals ? totals.reduce(( a, b ) => a + b): 0;
   return sum
 }
-
 

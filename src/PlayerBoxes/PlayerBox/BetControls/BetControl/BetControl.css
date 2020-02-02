@@ -15,14 +15,14 @@
 }
 
 .bet_control button:disabled {
-  background-color: #AC9980;
+  background-color: rgb(180, 169, 154);
   border: 1px solid #7E7365;
   color: #ccc;
   cursor: default;
 }
 
 .bet_control button:hover:disabled {
-  background-color: rgb(180, 169, 154);
+  background-color: rgb(185, 179, 171);
   color: #ccc;
   cursor: not-allowed;
 }
@@ -34,17 +34,17 @@
 }
 
 .bet_control .remove {  
-  background-color: rgb(75, 74, 73);
+  background-color: rgb(218, 97, 66);
   color: white;
 }
 
 .bet_control .add {
-  background-color: rgb(196, 194, 192);
+  background-color: rgb(73, 160, 73);
   color: white;
 }
 
 .build_control .remove:hover, .build_control .remove:active {  
-  background-color: #DAA972;
+  background-color: rgb(107, 233, 107);
   color: white;
 }
 

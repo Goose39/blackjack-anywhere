@@ -1,0 +1,17 @@
+.user {
+
+}
+
+.balance {
+  float: right;
+}
+
+.user, .balance {
+  font-weight: bold;
+  font-size: medium;
+}
+
+.table_header {
+  background-color: #ad6037;
+  color: white;
+}

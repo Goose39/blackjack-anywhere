@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import './App.css';
-import { CreateShoe, HandTotal } from './store';
+import { CreateShoe, HandTotal, shuffle } from './store';
 import Welcome from './Welcome/Welcome'
 import TableContext from './TableContext';
 import Table from './Table/Table';
@@ -93,21 +93,56 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.resetShoe();
+    const shuffledShoe = this.resetShoe();
+
+    this.setState ({ shoe: shuffledShoe })
   }
+
+  
+  resetShoe = () => {
+    const decks = this.state.decks
+    const shoe = CreateShoe(decks);
+    return shuffle(shoe)
+  }
+
+  //   getNextCard = () => {
+  //     const newShoe = [...this.state.shoe];
+  //     const nextCard = newShoe.shift();
+  //     this.setState ({ shoe: newShoe })
+  //     return nextCard 
+  // }
 
   hit = (boxIndex) => {
     // const nextCard = this.getNextCard();
     const newShoe = [...this.state.shoe];
-    const nextCard = newShoe.shift();
-    const updatedPlayerBoxes = [...this.state.playerBoxes];
-    
-    updatedPlayerBoxes[boxIndex].cards.push(`${nextCard}`);
+    const nextCard = newShoe[0];
+    newShoe.splice(0, 1);
 
-    this.setState ({
-     playerBoxes: updatedPlayerBoxes,
-     shoe: newShoe
-    })
+    // const nextCard = newShoe.shift();
+    const updatedPlayerBoxes = [...this.state.playerBoxes];
+    const box = updatedPlayerBoxes[boxIndex]
+    
+    box.cards.push(`${nextCard}`);
+
+    if (HandTotal(box.cards) > 21 ) {
+      box.result = 'Bust';
+      box.payout = 0;
+
+      this.setState ({
+        playerBoxes: updatedPlayerBoxes,
+        shoe: newShoe
+        }, this.stand(boxIndex))
+    } else if (HandTotal(box.cards) === 21) {
+        this.setState ({
+        playerBoxes: updatedPlayerBoxes,
+        shoe: newShoe
+        }, this.stand(boxIndex))
+      } else {
+        this.setState ({
+        playerBoxes: updatedPlayerBoxes,
+        shoe: newShoe
+        })
+      }
   }
 
   stand = (boxIndex) => {
@@ -125,21 +160,17 @@ class App extends React.Component {
   }
 
   updateDecks = (decks) => {
-    this.setState({ decks })
-  }
-
-  resetShoe = () => {
-    const decks = this.state.decks
-    const shoe = CreateShoe(decks);
-    this.setState ({ shoe: shoe })
+    console.log("updateDecks: ", decks)
+    this.setState({ decks: decks })
   }
 
   resetHand = () => {
-    const decks = this.state.decks
-    const shoe = CreateShoe(decks);
+    const shoe = this.resetShoe();
     const playerBoxes = [...this.state.playerBoxes];
     const updatedDealerBox = {...this.state.dealerBox};
     updatedDealerBox.cards = [];
+    updatedDealerBox.result = "";
+    updatedDealerBox.total = null;
     console.log("before reset", playerBoxes);
     const updatedPlayerBoxes = playerBoxes.map(box => {
       box.open = false;
@@ -167,47 +198,42 @@ class App extends React.Component {
   }
 
   deal = () => {
-
     const newShoe = [...this.state.shoe];
+    const playerBoxes = [...this.state.playerBoxes];
+    const updatedDealerBox = {...this.state.dealerBox};
+    let updatedOpenBoxes = [];
+    let updatedPlayerBoxes = [];
     //deal 2 cards to each open box
     for (let i=1; i<=2; i++) {
-      const playerBoxes = [...this.state.playerBoxes]
-      let updatedOpenBoxes = []
       //Deal each open box a card
-      const updatedPlayerBoxes = playerBoxes.map(box => {
+      updatedPlayerBoxes = playerBoxes.map(box => {
         if (box.open) {
           updatedOpenBoxes.push(box.id)
           // const nextCard = this.getNextCard()
-          const nextCard = newShoe.shift();
-          box.cards.push(nextCard)
+          const nextCard = newShoe[0];
+          newShoe.splice(0, 1);
+          box.cards.push(nextCard);
         } 
         return box
       })
       //Deal Dealer a card
-      const updatedDealerBox = {...this.state.dealerBox}
-      const nextCard = newShoe.shift();
-      const firstOpenBox = updatedOpenBoxes[0]
-
+      const nextCard = newShoe[0];
+      newShoe.splice(0, 1);
       updatedDealerBox.cards.push(nextCard)
-
-      //Update state with all cards dealt and Open boxes
-      this.setState({
-        playerBoxes: updatedPlayerBoxes,
-        dealerBox: updatedDealerBox,
-        openBoxes: updatedOpenBoxes,
-        shoe: newShoe,
-        handStarted: true,
-        activeBox: {id: firstOpenBox}
-      })
     }
+
+    const firstOpenBox = updatedOpenBoxes[0]
+
+    //Update state with all cards dealt and Open boxes
+    this.setState({
+      activeBox: {id: firstOpenBox},
+      playerBoxes: updatedPlayerBoxes,
+      dealerBox: updatedDealerBox,
+      openBoxes: updatedOpenBoxes,
+      shoe: newShoe,
+      handStarted: true,
+    }, () => {this.setActiveBox(firstOpenBox-1);})
   }
-  
-  // getNextCard = () => {
-  //     const newShoe = [...this.state.shoe];
-  //     const nextCard = newShoe.shift();
-  //     this.setState ({ shoe: newShoe })
-  //     return nextCard 
-  // }
 
   split = (cards) => {
 
@@ -231,11 +257,14 @@ class App extends React.Component {
     const updatedPlayerBoxes = [...this.state.playerBoxes]
     updatedPlayerBoxes[boxIndex].payout = updatedPlayerBoxes[boxIndex].bet/2;
     updatedPlayerBoxes[boxIndex].bet = null; 
-    updatedPlayerBoxes[boxIndex].result = "SURRENDER"
+    updatedPlayerBoxes[boxIndex].result = "SURRENDER";
+    let balance = this.state.balance;
+    balance += updatedPlayerBoxes[boxIndex].payout
     
 
     this.setState({
       playerBoxes: updatedPlayerBoxes,
+      balance: balance
     }, () => {this.setActiveBox(boxIndex + 1);}
     )
   }
@@ -244,22 +273,23 @@ class App extends React.Component {
     const updatedPlayerBoxes = [...this.state.playerBoxes]
 
     if (boxIndex <= 4) {
-      for (let i = boxIndex; i <= 4; i++) {
-        if (updatedPlayerBoxes[i].open) {
-          updatedPlayerBoxes[i].active = true;
-          return this.setState ({
-            activeBox: { id: boxIndex + 1 },
-            playerBoxes: updatedPlayerBoxes
-          })
+      while (boxIndex <= 4) {
+      if (updatedPlayerBoxes[boxIndex].open) {
+            updatedPlayerBoxes[boxIndex].active = true;
+            return this.setState ({
+              activeBox: { id: boxIndex + 1 },
+              playerBoxes: updatedPlayerBoxes
+            })
+          } else boxIndex++
         }
-      }
+        this.setState ({
+          activeBox: { id:  undefined},
+        }, () => {this.resultDealerHand();})
     } else {
       this.setState ({
         activeBox: { id:  undefined},
       }, () => {this.resultDealerHand();})
     }
-
-  
 }
 
   addBetHandler = (boxId, bet) => {
@@ -313,9 +343,15 @@ class App extends React.Component {
     dealerBox.total = HandTotal(dealerBox.cards);
 
     while (dealerBox.total < 17) {
-      const nextCard = newShoe.shift();
+      // const nextCard = newShoe.shift();
+      const nextCard = newShoe[0];
+      newShoe.splice(0, 1);
       dealerBox.cards.push(nextCard);
       dealerBox.total = HandTotal(dealerBox.cards);
+    }
+
+    if (dealerBox.total > 21) {
+      dealerBox.result = "Bust"
     }
 
     this.setState({
@@ -327,44 +363,50 @@ class App extends React.Component {
 
   playerPayout = () => {
 
-    const updatedPlayerBoxes = [...this.state.playerBoxes];
+    const playerBoxes = [...this.state.playerBoxes];
     const dealer = {...this.state.dealerBox}
     let balance = this.state.balance;
 
-    updatedPlayerBoxes.map(box => {
-      if (box.result == "") {
-        
-        if ((box.cards.length === 2) && (box.total === 21)) {
-          box.result = "Blackjack!"
-          box.payout = box.bet * 3/2
+    const updatedPlayerBoxes = playerBoxes.map(box => {
+      if (box.result === "" && box.open && box.total <= 21) {
+
+        if (dealer.total <=21 && box.total > dealer.total ) {
+          box.payout = box.bet * 2;
+          box.result = `Win $${box.bet}`;
+          balance += box.payout;
+        } else if (dealer.total > 21 && box.total <= 21 ) {
+          box.payout = box.bet * 2;
+          box.result = `Win $${box.bet}`;
+          balance += box.payout;
+        } else if (box.total === dealer.total) {
+          box.result = "Push!"
+          box.payout = box.bet
           balance += box.payout
-        }
-        if (box.total > 21) {
-          box.result = 'Bust';
-          box.payout = 0;
         } else {
-          if (box.total > dealer.total) {
-            box.payout = box.bet * 2;
-            box.result = `Win ${box.bet}`;
-            balance += box.payout
-          } else if (box.total === dealer.total) {
-            box.result = "Push!"
-            box.payout = box.bet
-            balance += box.payout
-          } else {
-            box.result = "Lose"
-          }
-        }
-      } else if (box.result == "SURRENDER") {
+          box.result = "Lose"
+        } 
+        } else if (box.result == "Surrender") {
+          balance += box.payout
+        } 
+
+      if ((box.cards.length === 2) && (box.total === 21)) {
+        box.result = "Blackjack!"
+        box.payout = box.bet * 3/2
         balance += box.payout
-      } 
+      }
+        return box
     })
 
     this.setState({
       playerBoxes: updatedPlayerBoxes,
       balance: balance
     })
+  }
 
+  resetBalance = () => {
+    this.setState({
+      balance: 500
+    })
   }
 
   render() {
@@ -396,7 +438,7 @@ class App extends React.Component {
               exact
               render={({ history }) => <Welcome 
                                     decks={this.state.decks}
-                                    updateDecks={() => this.updateDecks()}
+                                    updateDecks={this.updateDecks}
                                     goToTable={() => history.push('/table')} 
                                   />}
             />
@@ -410,6 +452,7 @@ class App extends React.Component {
                               dealerBox={{...this.state.dealerBox}}
                               handStarted={this.state.handStarted}
                               nextHand={() => this.resetHand()}
+                              resetBalance={() => this.resetBalance()}
                             />}
             />
           </Switch>

@@ -37,12 +37,20 @@ export default class PlayerControls extends React.Component {
       } 
     else if ((this.props.handStarted) && (this.context.openBoxes.length > 0))
       {
-        controls.push(<button className="action" onClick={() => this.props.nextHand()}>START NEW HAND</button>);
+        if (this.context.balance > 25) {
+          controls.push(<button className="action" onClick={() => this.props.nextHand()}>START NEW HAND</button>);
+        } else {
+          console.log('Min Bet is $25. Insufficent balance to meet minimum')
+          controls.push(<button className="action" onClick={() => this.props.resetBalance()}>RESET BALANCE</button>);
+        }
+        
       }
 
     return (
-      <section className="actions">
-        {controls}
+      <section class="controls">
+        <div className="actions">
+         {controls}
+        </div>
       </section>
     )
     }

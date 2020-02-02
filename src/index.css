@@ -21,39 +21,20 @@ body {
   font-family: "Open Sans",
   sans-serif;
   font-size: 20px;
-  color: #444;
+  color: rgb(68, 68, 68);
   text-align: center;
   line-height: 1.5;
 }
 
-nav,
-footer {
-  padding: 1% 0;
-  background-color: #aaa;
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-
 header {
-  padding: 45px 15px;
+  padding: 15px;
   display: flex;
   justify-content: space-around;
+  background-color: white;
 }
 
 section {
-  min-height: 200px;
-  padding: 30px 15px;
-  background-color: #bbb;
-}
-
-section:nth-child(even) {
-  background-color: #ddd;
+  padding: 0px 15px;
 }
 
 p {
@@ -65,93 +46,22 @@ p + p {
   margin-top: 15px;
 }
 
-.user {
-  font-size: small;
-}
-
-.balance {
-  font-size: small;
-  float: right;
-}
-
-.dealer-section {
-  display: flex;
-  justify-content: center;
-}
-
-.player-boxes {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-around;
-}
-
-.bet {
-  width: 100px;
-  height: 100px;
-  border: rgb(255, 255, 255) 5px solid;
-  line-height: 100px;
-  border-radius: 100%;
-}
-
 .hidden {
   visibility: hidden;
 }
 
-.hand-count {
-  color: white;
-  background-color: black;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 100%;
-  position: relative;
-  left: -25px;
-  top: 120px;
+main {
+  height: 100vh;
 }
 
-.result, .dealer-result {
-  height: 30px;
-  width: 120px;
-  color: white;
-  background-color: rgb(102, 100, 100);
-  position: relative;
-} 
 
-.result {
-  bottom: 160px;
-  left: -20px;
-}
-
-.dealer-result {
-  bottom: 60px;
-  left: -5px;
-}
 
 @media only screen and (min-width: 500px) {
 
-  #box-3 {
-    margin-top: 100px;
-  }
 
-  #box-2, #box-4 {
-  margin-top: 75px;
-  display: block
-  }
 }
 
 @media only screen and (min-width: 1100px) {
 
-  #box-3 {
-    margin-top: 100px;
-  }
 
-  #box-2, #box-4 {
-  margin-top: 75px;
-  display: block
-  }
-
-  #box-1, #box-5 {
-    margin-top: 30px;
-    display: block
-  }
 }

@@ -1,0 +1,19 @@
+.dealer-section {
+  display: flex;
+  justify-content: center;
+  min-height: 150px;
+
+}
+
+.dealer-result {
+  bottom: 80px;
+}
+
+
+@media only screen and (min-width: 500px) {
+
+}
+
+@media only screen and (min-width: 1100px) {
+
+}

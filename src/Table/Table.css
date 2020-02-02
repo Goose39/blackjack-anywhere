@@ -1,0 +1,17 @@
+.player-boxes {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+
+.result, .dealer-result {
+  height: 30px;
+  width: 100%;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  position: relative;
+} 
+
+.result {
+  bottom: 180px;
+}
