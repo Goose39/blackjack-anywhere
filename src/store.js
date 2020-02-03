@@ -49,15 +49,26 @@ export const HandTotal = (cards) => {
     {symbol: 'A', value: 11}
   ]
 
+  let hasA = false;
+
   const totals = cards.length > 1 ? 
     cards.map(card => {
       const cardSymbol = card.slice(0,-1);
       const cardValue = cardValues.find(card => card.symbol === cardSymbol)
+      if (cardSymbol === "A") {
+        hasA = true;
+      }
       return cardValue.value
       }) 
     : undefined;
 
-  const sum = totals ? totals.reduce(( a, b ) => a + b): 0;
+  let sum = totals ? totals.reduce(( a, b ) => a + b): 0;
+// Check to convert A from 11 to one if total is over 21/bust
+  if (sum > 21 && hasA) {
+    const aceIndex = totals.indexOf(11)
+    totals[aceIndex] = 1;
+    sum = totals.reduce(( a, b ) => a + b)
+  } 
+
   return sum
 }
-

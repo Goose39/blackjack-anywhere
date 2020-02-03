@@ -10,7 +10,7 @@ class App extends React.Component {
   state = {
     user:'Guest',
     balance: 500,
-    decks: 1,
+    decks: 5,
     shoe: [],
     handStarted: false,
     openBoxes: [],
@@ -160,7 +160,6 @@ class App extends React.Component {
   }
 
   updateDecks = (decks) => {
-    console.log("updateDecks: ", decks)
     this.setState({ decks: decks })
   }
 
@@ -172,7 +171,6 @@ class App extends React.Component {
     updatedDealerBox.result = "";
     updatedDealerBox.total = null;
     updatedDealerBox.hideCard = true;
-    console.log("before reset", playerBoxes);
     const updatedPlayerBoxes = playerBoxes.map(box => {
       box.open = false;
       box.bet = null;

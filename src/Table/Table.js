@@ -6,7 +6,6 @@ import PlayerControls from '../PlayerControls/PlayerControls';
 import './Table.css';
 
 export default function Table(props) {
-  console.log(props.playerBoxes)
   return (
   <>  
     <TableHeader user={props.user} balance={props.balance}/>
