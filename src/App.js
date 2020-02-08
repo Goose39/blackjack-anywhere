@@ -9,7 +9,7 @@ import Table from './Table/Table';
 class App extends React.Component {
   state = {
     user:'Guest',
-    balance: 500,
+    balance: 1000,
     decks: 5,
     shoe: [],
     handStarted: false,
@@ -95,7 +95,6 @@ class App extends React.Component {
 
   componentDidMount() {
     const shuffledShoe = this.resetShoe();
-
     this.setState ({ shoe: shuffledShoe })
   }
 
@@ -247,9 +246,9 @@ class App extends React.Component {
     }, () => {this.setActiveBox(firstOpenBox-1);})
   }
 
-  split = (cards) => {
+  // split = (cards) => {
 
-  }
+  // }
 
   double = (boxIndex) => {
     this.hit(boxIndex)
@@ -416,6 +415,14 @@ class App extends React.Component {
     })
   }
 
+  handleSetUser = (user, balance) => {
+    console.log(user, balance)
+    this.setState({
+      user: user,
+      balance: balance
+    })
+  }
+
   render() {
     const value = {
       shoe: this.state.shoe,
@@ -444,14 +451,16 @@ class App extends React.Component {
               path='/'
               exact
               render={({ history }) => <Welcome 
-                                    decks={this.state.decks}
-                                    updateDecks={this.updateDecks}
-                                    goToTable={() => history.push('/table')} 
-                                  />}
+                                          handleSetUser={(user, balance) => this.handleSetUser(user, balance)}
+                                          goToTable={() => history.push('/table')} 
+                                        />}
             />
             <Route
               path='/table'
               render={() => <Table 
+                              handleSetUser={(user, balance) => this.handleSetUser(user, balance)}
+                              decks={this.state.decks}
+                              updateDecks={this.updateDecks}
                               deal={() => this.deal()} 
                               user={this.state.user} 
                               balance={this.state.balance} 

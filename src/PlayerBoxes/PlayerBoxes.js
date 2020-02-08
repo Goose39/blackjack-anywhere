@@ -19,7 +19,7 @@ export default function PlayerBoxes(props) {
           />
   }) : null
   return (
-    <section>
+    <section className="player-section">
     <div className="player-boxes">
      { boxes }
     </div>

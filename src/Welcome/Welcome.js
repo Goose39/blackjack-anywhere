@@ -1,10 +1,22 @@
 import React from 'react';
-import './Welcome.css'
+import './Welcome.css';
+import LoginForm from '../LoginForm/LoginForm';
+import RegistrationFrom from '../RegistrationForm/RegistrationForm'
 
 export default class Welcome extends React.Component {
+  state = {
+    formOption: ''
+  }
+
+  setFrom = (form) => {
+    this.setState({
+      formOption: form
+    })
+  }
+
   render() {
     return (
-      <>
+    <>
       <header role="banner">
         <h1>Blackjack Anywhere</h1>
       </header>
@@ -15,18 +27,16 @@ export default class Welcome extends React.Component {
         <p>Once you are at the table your account balance will be loaded with $1,000 in play credit. Try your best to build you bankroll and you could see your name at the top the leaderboard.</p>
         <p>Place a bet on any of the open boxes at the table and press deal.</p>
       </section>
-      <form onSubmit={() => this.props.goToTable()}>
-        <div>
-          <label htmlFor='decks'>No decks to play with: </label>
-          <input id="decks" type="number" max="5" min="1" value={this.props.decks} onChange={e => this.props.updateDecks(e.target.value)} />
-        </div>
-        <button className="action" type="submit">Let's Play!</button> 
-      </form>
+      <div className='login_options'>
+        <input type='button' onClick={() => this.props.goToTable()} value='Login as Guest' />
+        <input type='button' onClick={() => this.setFrom("Login")} value='Login' />
+        <input type='button' onClick={() => this.setFrom("Register")} value='Register' />
+      </div>
+      <div>
+        {this.state.formOption === 'Login'? <LoginForm onLoginSuccess={this.props.goToTable} handleSetUser={this.props.handleSetUser}/>: null}
+        {this.state.formOption === 'Register'? <RegistrationFrom onRegistrationSuccess={this.props.goToTable} handleSetUser={this.props.handleSetUser}/>: null}
+      </div>
     </>
     )
   }
-}
-
-Welcome.defaultProps = {
-  decks: 5
 }

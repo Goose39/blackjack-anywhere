@@ -26,11 +26,12 @@ export default class PlayerControls extends React.Component {
               {
                 controls.push(<button className="action" onClick={() => this.context.double(activeBoxIndex)}>DOUBLE</button>);
               }
-
-            if (activeBox.cards[0].slice(0,-1) === activeBox.cards[1].slice(0,-1) ) 
-              {
-                controls.push(<button className="action" onClick={() => this.context.split}>SPLIT</button>);
-              }
+            // Split function to be added at a later stage
+            
+            // if (activeBox.cards[0].slice(0,-1) === activeBox.cards[1].slice(0,-1) ) 
+            //   {
+            //     controls.push(<button className="action" onClick={() => this.context.split}>SPLIT</button>);
+            //   }
           }
         controls.push(<button className="action" onClick={() => this.context.hit(activeBoxIndex)}>HIT</button>);
         controls.push(<button className="action" onClick={() => this.context.stand(activeBoxIndex)}>STAND</button>);
