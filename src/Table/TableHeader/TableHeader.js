@@ -17,7 +17,6 @@ export default class TableHeader extends React.Component {
   }
 
   render() {
-
     return (
       <>
         <header role="banner" className="table_header">

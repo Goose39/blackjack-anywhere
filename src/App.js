@@ -5,11 +5,13 @@ import { CreateShoe, HandTotal, shuffle } from './store';
 import Welcome from './Welcome/Welcome'
 import TableContext from './TableContext';
 import Table from './Table/Table';
+import TokenService from './services/token-service'
+import BalanceService from './services/balance-service'
 
 class App extends React.Component {
   state = {
-    user:'Guest',
-    balance: 1000,
+    user:'',
+    balance: null,
     decks: 5,
     shoe: [],
     handStarted: false,
@@ -94,6 +96,21 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    if (TokenService.hasAuthToken()) {
+      const user = TokenService.readJwtToken().sub
+      const balance = BalanceService.getBalance(user)
+      console.log("user and balance on DidMount", user, balance)
+      this.setState({
+        user: user, 
+        balance: 5000
+      })
+    } else {
+      this.setState({
+        user: "Guest", 
+        balance: 1000
+      })
+    }
+
     const shuffledShoe = this.resetShoe();
     this.setState ({ shoe: shuffledShoe })
   }

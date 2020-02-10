@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input, Required } from '../Utils/Utils'
+import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
 
 export default class RegistrationForm extends Component {
@@ -11,6 +12,7 @@ export default class RegistrationForm extends Component {
 
   handleSubmit = ev => {
     ev.preventDefault()
+    TokenService.clearAuthToken();
     const { full_name, nick_name, user_name, password } = ev.target
 
     this.setState({ error: null })
