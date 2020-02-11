@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": "https://build.goose39dev.now.sh",
+  "alias": "https://blackjack-anywhere-7bg423nnn.now.sh/",
   "name": "blackjack-anywhere",
   "routes": [
       { "handle": "filesystem" },

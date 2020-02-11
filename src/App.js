@@ -1,10 +1,14 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
+import { withRouter } from "react-router";
 import './App.css';
 import { CreateShoe, HandTotal, shuffle } from './store';
-import Welcome from './Welcome/Welcome'
+import Welcome from './Welcome/Welcome';
 import TableContext from './TableContext';
 import Table from './Table/Table';
+import TokenService from './services/token-service';
+import IdleService from './services/idle-service';
+import BalanceService from './services/balance-service';
 
 class App extends React.Component {
   state = {
@@ -94,8 +98,25 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const shuffledShoe = this.resetShoe();
+    if (TokenService.hasAuthToken()) {
+      const user = TokenService.readJwtToken().sub
+      BalanceService.getBalance(user)
+      .then(balance => {
+        this.setState({
+          user: user, 
+          balance: balance
+        })
+      })
+      .catch(err => console.log(err))
+      
+    } else {
+      this.setState({
+        user: "Guest", 
+        balance: 500
+      })
+    }
 
+    const shuffledShoe = this.resetShoe();
     this.setState ({ shoe: shuffledShoe })
   }
 
@@ -228,7 +249,7 @@ class App extends React.Component {
       if ((box.cards.length === 2) && (box.total === 21)) {
         box.result = "Blackjack!";
         box.stand = true;
-        box.payout = box.bet * 3/2;
+        box.payout = box.bet * 5/2;
         balance += box.payout;
       }
     })
@@ -247,9 +268,9 @@ class App extends React.Component {
     }, () => {this.setActiveBox(firstOpenBox-1);})
   }
 
-  split = (cards) => {
+  // split = (cards) => {
 
-  }
+  // }
 
   double = (boxIndex) => {
     this.hit(boxIndex)
@@ -397,23 +418,65 @@ class App extends React.Component {
         } else {
           box.result = "Lose"
         } 
-        } else if (box.result == "Surrender") {
+        } else if (box.result === "Surrender") {
           balance += box.payout
         } 
 
         return box
     })
 
+    if (TokenService.hasAuthToken()) {
+      const { sub } = TokenService.readJwtToken()
+      BalanceService.updateBalance(sub, balance)
+      .then(res => {
+        this.setState({ 
+          playerBoxes: updatedPlayerBoxes,
+          balance: balance
+        })
+      })
+      .catch(err => console.log("catch error", err))
+    } else {
+      this.setState({ 
+        playerBoxes: updatedPlayerBoxes,
+        balance: balance
+      })
+    }
+  }
+
+  resetBalance = () => {
+    if (TokenService.hasAuthToken()) {
+      const { sub } = TokenService.readJwtToken()
+      BalanceService.updateBalance(sub, 500)
+      .then(res => {
+          this.setState({
+            balance: 500
+          })
+      })
+      .catch(err => console.log("catch error", err))
+    } else {
+      this.setState({
+        balance: 500
+      })
+    }
+  }
+
+  handleSetUser = (user, balance) => {
     this.setState({
-      playerBoxes: updatedPlayerBoxes,
+      user: user,
       balance: balance
     })
   }
 
-  resetBalance = () => {
+  logoutUserHandler = () => {
+    TokenService.clearAuthToken()
+    /* when logging out, clear the callbacks to the refresh api and idle auto logout */
+    TokenService.clearCallbackBeforeExpiry()
+    IdleService.unRegisterIdleResets()
     this.setState({
+      user: "Guest",
       balance: 500
     })
+    this.props.history.push('/')
   }
 
   render() {
@@ -444,14 +507,17 @@ class App extends React.Component {
               path='/'
               exact
               render={({ history }) => <Welcome 
-                                    decks={this.state.decks}
-                                    updateDecks={this.updateDecks}
-                                    goToTable={() => history.push('/table')} 
-                                  />}
+                                          handleSetUser={(user, balance) => this.handleSetUser(user, balance)}
+                                          goToTable={() => history.push('/table')} 
+                                        />}
             />
             <Route
               path='/table'
               render={() => <Table 
+                              handleSetUser={(user, balance) => this.handleSetUser(user, balance)}
+                              logoutUserHandler={() => this.logoutUserHandler()}
+                              decks={this.state.decks}
+                              updateDecks={this.updateDecks}
                               deal={() => this.deal()} 
                               user={this.state.user} 
                               balance={this.state.balance} 
@@ -469,4 +535,4 @@ class App extends React.Component {
     );
   }
   }
-export default App;
+export default withRouter(App);

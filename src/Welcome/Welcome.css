@@ -1,12 +1,29 @@
 form {
-
-}
-
-form {
   padding-top: 25px;
   background-color: white;
 }
 
+.login_container {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
 .instructions {
   background-color: white;
+}
+
+.login_options {
+  padding: 15px;
+  background-color: white;
+}
+
+.login_options > .user_login_control {
+  width: 120px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  margin: 2px;
 }

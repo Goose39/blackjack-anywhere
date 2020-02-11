@@ -1,17 +1,26 @@
-.user {
-
-}
-
-.balance {
-  float: right;
-}
-
-.user, .balance {
-  font-weight: bold;
-  font-size: medium;
-}
 
 .table_header {
   background-color: #ad6037;
   color: white;
+  font-weight: bold;
+  font-size: medium;
+  display: flex;
+  justify-content: space-between;
 }
+
+.user_login_control {
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  margin: 2px;
+}
+
+.user_details {
+  display: flex;
+  flex-direction: row;
+}
+
+.user_details > div > .user_login_control {
+    display: block;
+    width: 150px;
+  }

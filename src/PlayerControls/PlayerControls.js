@@ -26,11 +26,12 @@ export default class PlayerControls extends React.Component {
               {
                 controls.push(<button className="action" onClick={() => this.context.double(activeBoxIndex)}>DOUBLE</button>);
               }
+            // Split function to be added at a later stage
 
-            if (activeBox.cards[0].slice(0,-1) === activeBox.cards[1].slice(0,-1) ) 
-              {
-                controls.push(<button className="action" onClick={() => this.context.split}>SPLIT</button>);
-              }
+            // if (activeBox.cards[0].slice(0,-1) === activeBox.cards[1].slice(0,-1) ) 
+            //   {
+            //     controls.push(<button className="action" onClick={() => this.context.split}>SPLIT</button>);
+            //   }
           }
         controls.push(<button className="action" onClick={() => this.context.hit(activeBoxIndex)}>HIT</button>);
         controls.push(<button className="action" onClick={() => this.context.stand(activeBoxIndex)}>STAND</button>);
@@ -40,14 +41,13 @@ export default class PlayerControls extends React.Component {
         if (this.context.balance > 25) {
           controls.push(<button className="action" onClick={() => this.props.nextHand()}>START NEW HAND</button>);
         } else {
-          console.log('Min Bet is $25. Insufficent balance to meet minimum')
           controls.push(<button className="action" onClick={() => this.props.resetBalance()}>RESET BALANCE</button>);
         }
         
       }
 
     return (
-      <section class="controls">
+      <section className="controls">
         <div className="actions">
          {controls}
         </div>
