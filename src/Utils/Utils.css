@@ -27,10 +27,11 @@
 
 .Button {
   order: 1px solid #aaa;
-  background-color: #eee;
+  background-color: black;
   font-size: 1.1em;
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 8px 12px;
+  color: white;
   font-weight: bold;
 }
 

@@ -17,16 +17,26 @@ export default class TableHeader extends React.Component {
   }
 
   render() {
+
     return (
       <>
         <header role="banner" className="table_header">
-          {!this.props.handStarted? <button onClick={() => this.updateSwitchUserHandler()}>SWITCH USER</button>: null}
-          <div className="user">User: {this.props.user}</div>
-          <div className="balance">Balance: ${this.props.balance}</div>
+          <div className='user_details'>
+            <div>
+              <div className="user">User: {this.props.user}</div>
+              <div className="balance">Balance: ${this.props.balance}</div>
+            </div>
+            {!this.props.handStarted?
+            <div>
+              <button className='user_login_control' onClick={() => this.updateSwitchUserHandler()}>SWITCH USER</button>
+              <button className='user_login_control' onClick={() => this.props.logoutUserHandler()}>LOGOUT</button>
+            </div>
+            :null}
+          </div>
           {!this.props.handStarted? <DeckControl decks={this.props.decks} updateDecks={this.props.updateDecks} />: null}
         </header>
         <div>
-          {this.state.switchUser && !this.props.handStarted? <LoginForm handleSetUser={this.props.handleSetUser}/>: null }
+          {this.state.switchUser && !this.props.handStarted? <LoginForm handleSetUser={this.props.handleSetUser} addClass=' table_login' />: null }
         </div>
       </>
     )

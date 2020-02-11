@@ -1,4 +1,8 @@
 .LoginForm {
   max-width: 400px;
-  padding: 25px
+  padding: 25px;
+}
+
+.table_login {
+  position: absolute;
 }

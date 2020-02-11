@@ -2,8 +2,8 @@ import config from '../config'
 import TokenService from './token-service'
 
 const BalanceService = {
-  getBalance(user) {
-    fetch(`${config.API_ENDPOINT}/balance/${user}`, {
+  getBalance(user_name) {
+    return fetch(`${config.API_ENDPOINT}/balance/${user_name}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -19,11 +19,12 @@ const BalanceService = {
         return res.balance
       })
   },
-  updateBalance({ user_name, balance }) {
+  updateBalance(user_name, balance) {
     return fetch(`${config.API_ENDPOINT}/balance/${user_name}`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'content-type': 'application/json',
+        'authorization': `Bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({ user_name, balance }),
     })
@@ -35,7 +36,7 @@ const BalanceService = {
       .then(res => {
         return res
         })
-      },
+  },
 }
 
 export default BalanceService

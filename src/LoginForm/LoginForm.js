@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AuthApiService from '../services/auth-api-service';
+import TokenService from '../services/token-service'
+import BalanceService from '../services/balance-service'
 import { Button, Input } from '../Utils/Utils';
 import './LoginForm.css'
 
@@ -13,6 +15,7 @@ export default class LoginForm extends Component {
 
   handleSubmitJwtAuth = ev => {
     ev.preventDefault()
+    TokenService.clearAuthToken();
     this.setState({ error: null })
     const { user_name, password } = ev.target
 
@@ -21,9 +24,14 @@ export default class LoginForm extends Component {
       password: password.value,
     })
       .then(res => {
-        this.props.handleSetUser(user_name.value, 1500)
-        user_name.value = ''
-        password.value = ''
+        BalanceService.getBalance(user_name.value)
+        .then(balance => {
+          this.props.handleSetUser(user_name.value, balance)
+          user_name.value = ''
+          password.value = ''
+        })
+      })
+      .then(res => {
         this.props.onLoginSuccess()
       })
       .catch(res => {
@@ -35,7 +43,7 @@ export default class LoginForm extends Component {
     const { error } = this.state
     return (
       <form
-        className='LoginForm'
+        className={`LoginForm${this.props.addClass? this.props.addClass : ""}`}
         onSubmit={this.handleSubmitJwtAuth}
       >
         <div role='alert'>

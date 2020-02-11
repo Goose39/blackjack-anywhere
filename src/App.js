@@ -1,17 +1,19 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
+import { withRouter } from "react-router";
 import './App.css';
 import { CreateShoe, HandTotal, shuffle } from './store';
-import Welcome from './Welcome/Welcome'
+import Welcome from './Welcome/Welcome';
 import TableContext from './TableContext';
 import Table from './Table/Table';
-import TokenService from './services/token-service'
-import BalanceService from './services/balance-service'
+import TokenService from './services/token-service';
+import IdleService from './services/idle-service';
+import BalanceService from './services/balance-service';
 
 class App extends React.Component {
   state = {
-    user:'',
-    balance: null,
+    user:'Guest',
+    balance: 500,
     decks: 5,
     shoe: [],
     handStarted: false,
@@ -98,16 +100,19 @@ class App extends React.Component {
   componentDidMount() {
     if (TokenService.hasAuthToken()) {
       const user = TokenService.readJwtToken().sub
-      const balance = BalanceService.getBalance(user)
-      console.log("user and balance on DidMount", user, balance)
-      this.setState({
-        user: user, 
-        balance: 5000
+      BalanceService.getBalance(user)
+      .then(balance => {
+        this.setState({
+          user: user, 
+          balance: balance
+        })
       })
+      .catch(err => console.log(err))
+      
     } else {
       this.setState({
         user: "Guest", 
-        balance: 1000
+        balance: 500
       })
     }
 
@@ -244,7 +249,7 @@ class App extends React.Component {
       if ((box.cards.length === 2) && (box.total === 21)) {
         box.result = "Blackjack!";
         box.stand = true;
-        box.payout = box.bet * 3/2;
+        box.payout = box.bet * 5/2;
         balance += box.payout;
       }
     })
@@ -413,31 +418,65 @@ class App extends React.Component {
         } else {
           box.result = "Lose"
         } 
-        } else if (box.result == "Surrender") {
+        } else if (box.result === "Surrender") {
           balance += box.payout
         } 
 
         return box
     })
 
-    this.setState({
-      playerBoxes: updatedPlayerBoxes,
-      balance: balance
-    })
+    if (TokenService.hasAuthToken()) {
+      const { sub } = TokenService.readJwtToken()
+      BalanceService.updateBalance(sub, balance)
+      .then(res => {
+        this.setState({ 
+          playerBoxes: updatedPlayerBoxes,
+          balance: balance
+        })
+      })
+      .catch(err => console.log("catch error", err))
+    } else {
+      this.setState({ 
+        playerBoxes: updatedPlayerBoxes,
+        balance: balance
+      })
+    }
   }
 
   resetBalance = () => {
-    this.setState({
-      balance: 500
-    })
+    if (TokenService.hasAuthToken()) {
+      const { sub } = TokenService.readJwtToken()
+      BalanceService.updateBalance(sub, 500)
+      .then(res => {
+          this.setState({
+            balance: 500
+          })
+      })
+      .catch(err => console.log("catch error", err))
+    } else {
+      this.setState({
+        balance: 500
+      })
+    }
   }
 
   handleSetUser = (user, balance) => {
-    console.log(user, balance)
     this.setState({
       user: user,
       balance: balance
     })
+  }
+
+  logoutUserHandler = () => {
+    TokenService.clearAuthToken()
+    /* when logging out, clear the callbacks to the refresh api and idle auto logout */
+    TokenService.clearCallbackBeforeExpiry()
+    IdleService.unRegisterIdleResets()
+    this.setState({
+      user: "Guest",
+      balance: 500
+    })
+    this.props.history.push('/')
   }
 
   render() {
@@ -476,6 +515,7 @@ class App extends React.Component {
               path='/table'
               render={() => <Table 
                               handleSetUser={(user, balance) => this.handleSetUser(user, balance)}
+                              logoutUserHandler={() => this.logoutUserHandler()}
                               decks={this.state.decks}
                               updateDecks={this.updateDecks}
                               deal={() => this.deal()} 
@@ -495,4 +535,4 @@ class App extends React.Component {
     );
   }
   }
-export default App;
+export default withRouter(App);
