@@ -29,7 +29,10 @@ export const shuffle = (shoe) => {
 }
 
 export const sliceCard = (card) => {
+  const cardSymbol = card.slice(0,-1);
+  const cardSuit = card[-1];
   
+  return { symbol: cardSymbol, suit: cardSuit }
 }
 
 export const HandTotal = (cards) => {
@@ -63,11 +66,18 @@ export const HandTotal = (cards) => {
     : undefined;
 
   let sum = totals ? totals.reduce(( a, b ) => a + b): 0;
-// Check to convert A from 11 to one if total is over 21/bust
-  if (sum > 21 && hasA) {
-    const aceIndex = totals.indexOf(11)
-    totals[aceIndex] = 1;
-    sum = totals.reduce(( a, b ) => a + b)
+// Check to convert Aces from 11 to one if total is over 21/bust
+
+  while (sum > 21 && hasA) {
+    let aceIndex = totals.indexOf(11);
+    if (aceIndex != -1) {
+      // Update A value to 1 instead of orginal 11
+      totals[aceIndex] = 1;
+      // Recalculate sum with new A value
+      sum = totals.reduce(( a, b ) => a + b);
+      // Reset Index location of Ace, in order to check for next A
+      aceIndex = -1;
+    } else hasA = false 
   } 
 
   return sum
