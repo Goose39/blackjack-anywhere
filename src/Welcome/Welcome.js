@@ -30,9 +30,9 @@ export default class Welcome extends React.Component {
         <p>GOOD LUCK!</p>
       </section>
       <div className='login_options'>
-        <input className="user_login_control Button" type='button' onClick={() => this.props.goToTable()} value='Login as Guest' />
-        <input className="user_login_control Button" type='button' onClick={() => this.setFrom("Login")} value='Login' />
-        <input className="user_login_control Button" type='button' onClick={() => this.setFrom("Register")} value='Register' />
+        <input className="user_login_control" type='button' onClick={() => this.props.goToTable()} value='Login as Guest' />
+        <input className="user_login_control" type='button' onClick={() => this.setFrom("Login")} value='Login' />
+        <input className="user_login_control" type='button' onClick={() => this.setFrom("Register")} value='Register' />
       </div>
       <div className='login_container'>
         {this.state.formOption === 'Login'? <LoginForm onLoginSuccess={this.props.goToTable} handleSetUser={this.props.handleSetUser}/>: null}

@@ -1,7 +1,9 @@
 .dealer-section {
   display: flex;
   justify-content: center;
-  min-height: 20vh;
+  height: 15vh;
+  max-height: 180px;
+  min-height: 120px;
 }
 
 .dealer-result {
@@ -10,7 +12,15 @@
 
 
 @media only screen and (min-width: 500px) {
-
+  .dealer-section {
+    display: flex;
+    justify-content: center;
+    min-height: 20vh;
+    height: 30vh;
+    max-height: 250px;
+    min-height: 200px;
+  }
+  
 }
 
 @media only screen and (min-width: 1100px) {

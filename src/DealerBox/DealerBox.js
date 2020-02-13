@@ -14,8 +14,8 @@ export default function DealerBox(props) {
       const suit = card.slice(-1)
       cards.push(
         <div className={`cards`}>
-          <Card key={`box-dealer_card-1`} value={value} suit={suit} boxId={"dealer"}/>
-          <div className={`card-${props.id} back-card-outer card`}></div>
+          <Card key={`box-dealer_card-1`} value={value} suit={suit} id={1}/>
+          <div className={`card-2 back-card-outer card`}></div>
         </div>
       )
     } else {

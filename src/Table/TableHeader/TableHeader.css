@@ -18,6 +18,7 @@
   color: white;
   margin: 2px;
   font: 12px;
+  cursor: pointer;
 }
 
 .controls_options {
@@ -26,10 +27,6 @@
 
 .user_details {
   display: flex;
-}
-
-.burger {
-
 }
 
 .user_details > div > .user_login_control {

@@ -32,9 +32,11 @@ export default class RegistrationForm extends Component {
           password.value = ''
           this.props.onRegistrationSuccess()
         })
-      })
-    }
-
+    })
+    .catch(res => {
+      this.setState({ error: res.error })
+    })
+  }
   render() {
     const { error } = this.state
     return (

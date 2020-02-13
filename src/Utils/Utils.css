@@ -34,6 +34,7 @@
   padding: 8px 12px;
   color: white;
   font-weight: bold;
+  float: right;
 }
 
 .Required {

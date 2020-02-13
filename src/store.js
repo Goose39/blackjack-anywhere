@@ -70,7 +70,7 @@ export const HandTotal = (cards) => {
 
   while (sum > 21 && hasA) {
     let aceIndex = totals.indexOf(11);
-    if (aceIndex != -1) {
+    if (aceIndex !== -1) {
       // Update A value to 1 instead of orginal 11
       totals[aceIndex] = 1;
       // Recalculate sum with new A value

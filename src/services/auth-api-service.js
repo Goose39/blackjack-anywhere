@@ -11,11 +11,11 @@ const AuthApiService = {
       },
       body: JSON.stringify(user),
     })
-      .then(res => {
-        if (!res.ok) {
-          res.json().then(e => Promise.reject(e))
-        } else return res.status
-      })
+      .then(res =>
+        (!res.ok) 
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
   },
   postLogin({ user_name, password }) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
