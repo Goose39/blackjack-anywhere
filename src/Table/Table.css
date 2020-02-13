@@ -13,5 +13,17 @@
 } 
 
 .result {
-  bottom: 180px;
+  bottom: 160px;
+}
+
+@media only screen and (min-width: 500px) {
+  .result {
+    bottom: 180px;
+  }
+
+}
+
+@media only screen and (min-width: 1100px) {
+
+ 
 }

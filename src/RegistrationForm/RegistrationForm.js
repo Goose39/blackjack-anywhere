@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input, Required } from '../Utils/Utils';
 import TokenService from '../services/token-service';
-import BalanceService from '../services/balance-service';
 import AuthApiService from '../services/auth-api-service';
 
 export default class RegistrationForm extends Component {
@@ -81,7 +80,7 @@ export default class RegistrationForm extends Component {
         </div>
         <div className='nick_name'>
           <label htmlFor='RegistrationForm__nick_name'>
-            Nickname
+            Nickname <Required />
           </label>
           <Input
             name='nick_name'

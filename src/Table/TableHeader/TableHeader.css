@@ -4,23 +4,64 @@
   color: white;
   font-weight: bold;
   font-size: medium;
-  display: flex;
-  justify-content: space-between;
+  padding: 5px;
+}
+
+.balance {
+  position: relative;
+  left: 20px;
 }
 
 .user_login_control {
-  border-radius: 10px;
+  border-radius: 16px;
   background-color: black;
   color: white;
   margin: 2px;
+  font: 12px;
+}
+
+.controls_options {
+  display: none;
 }
 
 .user_details {
   display: flex;
-  flex-direction: row;
+}
+
+.burger {
+
 }
 
 .user_details > div > .user_login_control {
-    display: block;
-    width: 150px;
+  display: block;
+  width: 150px;
+}
+
+  @media only screen and (min-width: 500px) {
+    .burger {
+      display: none;
+    }
+
+    .balance {
+      position: static;
+      left: 20px;
+    }
+    
+
+    .user_details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .login_controls {
+      display: inline-block;
+    }
+
   }
+
+  @media only screen and (min-width: 1000px) {
+    .dealer-section {
+      padding-top: 50px;
+    }
+  }
+  

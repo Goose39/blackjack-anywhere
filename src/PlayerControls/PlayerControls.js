@@ -18,6 +18,9 @@ export default class PlayerControls extends React.Component {
         const activeBoxIndex = this.context.activeBox.id - 1;
         const activeBox = this.context.playerBoxes[activeBoxIndex];
 
+        controls.push(<button className="action" onClick={() => this.context.hit(activeBoxIndex)}>HIT</button>);
+        controls.push(<button className="action" onClick={() => this.context.stand(activeBoxIndex)}>STAND</button>);
+
         if (activeBox.cards.length === 2) 
           {
             controls.push(<button className="action" onClick={() => this.context.surrender(activeBoxIndex)}>SURRENDER</button>);
@@ -33,15 +36,13 @@ export default class PlayerControls extends React.Component {
             //     controls.push(<button className="action" onClick={() => this.context.split}>SPLIT</button>);
             //   }
           }
-        controls.push(<button className="action" onClick={() => this.context.hit(activeBoxIndex)}>HIT</button>);
-        controls.push(<button className="action" onClick={() => this.context.stand(activeBoxIndex)}>STAND</button>);
       } 
     else if ((this.props.handStarted) && (this.context.openBoxes.length > 0))
       {
         if (this.context.balance > 25) {
-          controls.push(<button className="action" onClick={() => this.props.nextHand()}>START NEW HAND</button>);
+          controls.push(<button className="action wide" onClick={() => this.props.nextHand()}>START NEW HAND</button>);
         } else {
-          controls.push(<button className="action" onClick={() => this.props.resetBalance()}>RESET BALANCE</button>);
+          controls.push(<button className="action wide" onClick={() => this.props.resetBalance()}>RESET BALANCE</button>);
         }
         
       }

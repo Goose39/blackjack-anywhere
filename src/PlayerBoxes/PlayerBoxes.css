@@ -1,4 +1,10 @@
+.box {
+  text-align: -webkit-center;
+}
 
+#box-3 {
+  margin-top: 0px;
+}
 
 @media only screen and (min-width: 500px) {
 

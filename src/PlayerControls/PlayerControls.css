@@ -5,24 +5,37 @@
 }
 
 .actions {
-  width: 75%;
-  padding-top: 25px;
+  width: 100%;
+  padding-top: 12px;
+
 }
 
 .action {
-  margin: 10px 10px;
-  font-size: 18px;
+  margin: 5px;
+  font-size: 12px;
   padding: 8px;
-  width: 80%;
-  height: 50px;
-  max-width: 250px;
-  border-radius: 10px;
+  width: 45%;
+  height: 30px;
+  max-width: 170px;
+  border-radius: 25px;
+  background-color: white;
 }
+
+.action.wide {
+  max-width: 200px;
+}
+
 
 @media only screen and (min-width: 500px) {
   .action {
+    font-size: 18px;
     height: 60px;
     max-width: 250px;
+    margin: 10px;
+  }
+
+  .actions {
+    padding-top: 25px;
   }
 
 }
