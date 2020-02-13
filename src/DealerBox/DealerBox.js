@@ -27,7 +27,7 @@ export default function DealerBox(props) {
     <section className="dealer-section">
     <div id="box-0" className="box">
       { cards }
-      { result? <div className="dealer-result">{result}</div>: null }
+      { result? <div className="dealer-result">{result}</div>: <div className="dealer-result hidden"></div> }
     </div>
     
   </section>
