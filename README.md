@@ -6,7 +6,7 @@ See Documentation in API repo [here](https://github.com/Goose39/blackjack-anywhe
 
 ## APP Screenshots
 - ### Welcome Screen
-![Welcome Screen](src\assets\images\screenshots\welcome.JPG "Welcome Screen")
+![Welcome Screen](src/assets/images/screenshots/welcome.JPG "Welcome Screen")
 - ### Bets 
 ![Bets](src\assets\images\screenshots\bets.JPG "Placed Bets")
 - ### Payout
