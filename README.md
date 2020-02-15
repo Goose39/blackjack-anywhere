@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Blackjack Anywhere
+Play blackjack anywhere. Click to go to the [Live App](https://blackjack-anywhere.goose39dev.now.sh/)
 
-## Available Scripts
+## API Documentation
+See Documentation in API repo [here](https://github.com/Goose39/blackjack-anywhere-api)
 
-In the project directory, you can run:
+## APP Screenshots
+- ### Welcome Screen
+![Welcome Screen](src\assets\images\screenshots\welcome.JPG "Welcome Screen")
+- ### Bets 
+![Bets](src\assets\images\screenshots\bets.JPG "Placed Bets")
+- ### Payout
+![Payout](src\assets\images\screenshots\payout.JPG "Payout")
+- ### Register
+![Register](src\assets\images\screenshots\register.JPG "Registration Form")
+- ### Login
+![Login](src\assets\images\screenshots\login.JPG "Login Form")
 
-### `npm start`
+## Summary and Instructions
+Blackjack Anywhere is an app that allows you to play blackjack where ever you are. The reponsive design supports any screen size from PC or Laptop to Tables and Mobile Phones. <br>
+<br>
+Users have the option to register an account and have their accumulative winnings saved for when the come back and play again. If you dont wont to create an account you can also you the built in test account "Guest", just click thte "login as guest" button on the welcome screen and you are ready to play!<br><br>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Once you are at the table, use the + and - buttons to add that chip value to your bet. When you are finish placing your bets (remember you can play up to 5 boxes at the same time) click the deal button to get the hand started. <br><br>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Once the hand has been started you will see all cards dealt to the boxes that you have placed a bet on. There will be a blue border around the hand that is active and your decisions will be related to that active box. <br><br>
 
-### `npm test`
+Click HIT to get another card.<br>
+Click STAND to have no more cards dealt to that box.<br>
+Click SURRENDER if you would like to forfeit your hand. <br>
+Click DOUBLE if you would like to double your bet and get just one more card.<br><br>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Once you have gone through the action on each box, the dealer will the deal their cards and pay you out according to the result. <br><br>
 
-### `npm run build`
+Blown up your bankroll? Dont stress, just click the RESET BALANCE button and you will have your balance reloaded with another $500 <br><br>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Rules: <br>
+- Dealer Stands on 17<br>
+- Blackjack pays 3/2<br>
+- No Spliting<br><br>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Features:<br>
+Players can choose how many decks they would like to play (1 - 50)<br>
+Number of decks selected will be saved automatically 
+Balances are saved upon payout
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Technology
+App was built using React and API built with NodeJS and PostgreSQL. Want more information about the backend? Checkout the [API Documentation](https://github.com/Goose39/blackjack-anywhere-api)
