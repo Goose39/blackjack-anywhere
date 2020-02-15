@@ -6,15 +6,15 @@ See Documentation in API repo [here](https://github.com/Goose39/blackjack-anywhe
 
 ## APP Screenshots
 - ### Welcome Screen
-![Welcome Screen](src\assets\images\screenshots\welcome.JPG "Welcome Screen")
+![Welcome Screen](src/assets/images/screenshots/welcome.JPG "Welcome Screen")
 - ### Bets 
-![Bets](src\assets\images\screenshots\bets.JPG "Placed Bets")
+![Bets](src/assets/images/screenshots/bets.JPG "Placed Bets")
 - ### Payout
-![Payout](src\assets\images\screenshots\payout.JPG "Payout")
+![Payout](src/assets/images/screenshots/payout.JPG "Payout")
 - ### Register
-![Register](src\assets\images\screenshots\register.JPG "Registration Form")
+![Register](src/assets/images/screenshots/register.JPG "Registration Form")
 - ### Login
-![Login](src\assets\images\screenshots\login.JPG "Login Form")
+![Login](src/assets/images/screenshots/login.JPG "Login Form")
 
 ## Summary and Instructions
 Blackjack Anywhere is an app that allows you to play blackjack where ever you are. The reponsive design supports any screen size from PC or Laptop to Tables and Mobile Phones. <br>
