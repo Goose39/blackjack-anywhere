@@ -8,11 +8,8 @@ const TableContext = React.createContext( {
   nextCard: () => {},
   hit: () => {},
   stand: () => {},
-  split: () => {},
   surrender: () => {},
   double: () => {},
-  deal: () => {},
-  payout: () => {},
   addBet: () => {},
   removeBet: () => {}
 } )

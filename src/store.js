@@ -1,3 +1,4 @@
+// CreateShoe, creates array of all cards. Using number of decks player has selected
 export const CreateShoe = (decks) => {
   const suits = ['h', 'd', 'c', 's']
   const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -10,11 +11,12 @@ export const CreateShoe = (decks) => {
   
   return shoe.flat();
 }
-
+// RNG
 const randNo = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
  }
 
+ // Shuffles all cards in the shoe
 export const shuffle = (shoe) => {
   let newShoe = []
   while (shoe.length > 0)
@@ -27,14 +29,14 @@ export const shuffle = (shoe) => {
 
   return newShoe
 }
-
+// Slices cards to get value and symbol 
 export const sliceCard = (card) => {
   const cardSymbol = card.slice(0,-1);
   const cardSuit = card[-1];
   
   return { symbol: cardSymbol, suit: cardSuit }
 }
-
+// Works out totals of each hands card combination
 export const HandTotal = (cards) => {
   const cardValues = [
     {symbol: '2', value: 2},

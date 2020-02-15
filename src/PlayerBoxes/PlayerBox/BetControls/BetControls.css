@@ -1,6 +1,7 @@
 .bet_controls_box {
   text-align: center;
-  margin-top: -30px;
+  margin-top: -25px;
+  touch-action: manipulation; /* To disable zoom when clicking fast on iOS,  */
 }
 
 @media only screen and (min-width: 500px) {

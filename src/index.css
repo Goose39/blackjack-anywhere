@@ -4,22 +4,17 @@
 
 body {
   margin: 0;
-}
-
-body {
-  font-family: "Open Sans",
-    sans-serif;
-  font-size: 20px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 16px;
   color: rgb(68, 68, 68);
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.15;
 }
 
 header {
-  padding: 15px;
+  padding: 8px;
   display: flex;
   justify-content: space-around;
-  background-color: white;
 }
 
 section {
@@ -27,8 +22,8 @@ section {
 }
 
 p {
-  margin: 0 auto;
-  max-width: 650px;
+  background-color: white;
+  text-align: left;
 }
 
 .hidden {
@@ -41,21 +36,40 @@ main {
 
 header > h1 {
   font-size: 30px;
+  color: white;
+  margin: 5px;
 }
 
 
 
 @media only screen and (min-width: 500px) {
-  header > h1 {
-    font-size: 40px;
+
+  header {
+    padding: 15px;
+  }
+  
+
+  body {
+    font-size: 20px;
+    line-height: 1.5;
   }
 
   p + p {
     margin-top: 15px;
   }
 }
+@media only screen and (min-width: 500px) and (max-width: 1000px) {
 
-@media only screen and (min-width: 1100px) {
+  header > h1 {
+    font-size: 40px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .app_name {
+    margin-left: -250px;
+  }
 
-
+  header > h1 {
+    font-size: 50px;
+  }
 }

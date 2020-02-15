@@ -35,8 +35,6 @@ class App extends React.Component {
         cards: [],
         total: null,
         payout: null, 
-        split: false,
-        splitCards: [], 
         stand: null, 
         result: "",
         active: false
@@ -48,8 +46,6 @@ class App extends React.Component {
         cards: [],
         total: null,
         payout: null, 
-        split: false, 
-        splitCards: [],
         stand: null,
         result: "",
         active: false
@@ -61,8 +57,6 @@ class App extends React.Component {
         cards: [],
         total: null,
         payout: null, 
-        split: false, 
-        splitCards: [], 
         stand: null,
         result: "",
         active: false
@@ -73,9 +67,7 @@ class App extends React.Component {
         bet: null, 
         cards: [],
         total: null,
-        payout: null, 
-        split: false,
-        splitCards: [],  
+        payout: null,  
         stand: null,
         result: "",
         active: false
@@ -86,9 +78,7 @@ class App extends React.Component {
         bet: null, 
         cards: [],
         total: null,
-        payout: null, 
-        split: false,
-        splitCards: [],   
+        payout: null,   
         stand: null,
         result: "",
         active: false
@@ -127,19 +117,10 @@ class App extends React.Component {
     return shuffle(shoe)
   }
 
-  //   getNextCard = () => {
-  //     const newShoe = [...this.state.shoe];
-  //     const nextCard = newShoe.shift();
-  //     this.setState ({ shoe: newShoe })
-  //     return nextCard 
-  // }
-
   hit = (boxIndex) => {
-    // const nextCard = this.getNextCard();
     const newShoe = [...this.state.shoe];
     const nextCard = newShoe.shift();
 
-    // const nextCard = newShoe.shift();
     const updatedPlayerBoxes = [...this.state.playerBoxes];
     const box = updatedPlayerBoxes[boxIndex]
     
@@ -183,7 +164,7 @@ class App extends React.Component {
   updateDecks = (decks) => {
     this.setState({ decks: decks })
   }
-
+  // reset all previous hand values and enable betting for next hand 
   resetHand = () => {
     const shoe = this.resetShoe();
     const playerBoxes = [...this.state.playerBoxes];
@@ -217,7 +198,7 @@ class App extends React.Component {
       shoe: shoe
     })
   }
-
+  // deal first two cards to all open boxes (with bets) and dealers box
   deal = () => {
     const newShoe = [...this.state.shoe];
     const playerBoxes = [...this.state.playerBoxes];
@@ -268,10 +249,6 @@ class App extends React.Component {
     }, () => {this.setActiveBox(firstOpenBox-1);})
   }
 
-  // split = (cards) => {
-
-  // }
-
   double = (boxIndex) => {
     this.hit(boxIndex)
     let balance = this.state.balance;
@@ -301,7 +278,7 @@ class App extends React.Component {
     }, () => {this.setActiveBox(boxIndex + 1);}
     )
   }
-
+  // Set next open box to active box
   setActiveBox = (boxIndex) => {   
     const updatedPlayerBoxes = [...this.state.playerBoxes]
 
@@ -369,7 +346,7 @@ class App extends React.Component {
       openBoxes: openBoxes
     })
   }
-
+  // Deal dealer cards according to specified rules. Once player has resulted their hands. 
   resultDealerHand = () => {
     const dealerBox = {...this.state.dealerBox};
     const newShoe = [...this.state.shoe];
@@ -393,7 +370,7 @@ class App extends React.Component {
     )
     
   }
-
+  // Pay players winning hands and update balance
   playerPayout = () => {
 
     const playerBoxes = [...this.state.playerBoxes];
@@ -491,7 +468,6 @@ class App extends React.Component {
       deal: this.deal,
       hit: this.hit,
       stand: this.stand,
-      split: this.split,
       surrender: this.surrender,
       double: this.double,
       payout: this.payout,

@@ -25,7 +25,7 @@
 
 .card-value {
   position: relative;
-  top: 8px;
+  top: 2px;
 }
 
 .card-inner {
@@ -49,6 +49,10 @@
 }
 
 @media only screen and (min-width: 500px) {
+
+  .card-value {
+    top: 8px;
+  }  
 
   .front-card-outer {
     font-size: medium;

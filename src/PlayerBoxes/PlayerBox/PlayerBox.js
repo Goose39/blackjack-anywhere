@@ -2,8 +2,7 @@ import React from 'react';
 import Cards from '../../Cards/Cards'
 import PlayerBet from './PlayerBet/PlayerBet';
 import BetControls from './BetControls/BetControls'
-import './PlayerBox.css';
-
+// each player box consists of CARDS, BET, BET CONTROLS and RESULT ribbon
 export default class PlayerBox extends React.Component {
   render() {
     return (

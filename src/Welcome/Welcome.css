@@ -2,21 +2,43 @@ form {
   padding-top: 25px;
   background-color: white;
 }
+.welcome {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.suit_sidebar {
+  height: 10vh;
+  padding: 15px;
+}
+
+.left_sidebar {
+  display: none;
+}
+
+.center_wraper {
+  border-radius: 15px;
+  background-color: white;
+  max-width: 800px;
+}
+
+.blackjack_ss {
+  display: none;
+  padding: 25px;
+}
 
 .login_container {
-  width: 100%;
-  background-color: white;
   display: flex;
   justify-content: center;
 }
 
 .instructions {
-  background-color: white;
+  padding: 4px;
 }
 
-.login_options {
-  padding: 15px;
-  background-color: white;
+.instructions > p {
+  margin: 8px;
 }
 
 .login_options > .user_login_control {
@@ -27,6 +49,36 @@ form {
   margin: 2px;
 }
 
-.welcome_wrapper {
+.left {
+  float: left;
+}
+
+.right {
+  position: relative
+}
+
+
+@media only screen and (min-width: 500px) {
+
+  .instructions {
+    padding: 15px;
+  }
+
+  .instructions > p {
+    margin: 16px;
+  }
+
+  .left_sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
   
+  .blackjack_ss {
+    display: block;
+    padding: 25px;
+  }
+
 }

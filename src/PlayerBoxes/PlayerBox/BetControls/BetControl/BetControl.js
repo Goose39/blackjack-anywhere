@@ -1,7 +1,7 @@
 import React from 'react'
 import './BetControl.css'
 
-
+// Controls to add and remove chips from bet amount
 const BetControl = (props) => (
   <div className="bet_controls">
     <div className="chip">

@@ -9,6 +9,24 @@ export default class RegistrationForm extends Component {
   }
 
   state = { error: null }
+  // Password Validation before sending request to server
+  validatePassword = password => {
+    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
+
+    if (password.length < 8) {
+      return 'Password must be at least 8 characters'
+    }
+    if (password.length > 72) {
+      return 'Password msut be less than 72 characters'
+    }
+    if (password.startsWith(' ') || password.endsWith(' ')) {
+      return 'Password cannot start or end with empty spaces'
+    }
+    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
+      return 'Password must contain one upper case, lower case, number and special character'
+    }
+    return null
+  }
 
   handleSubmit = ev => {
     ev.preventDefault()
@@ -18,25 +36,32 @@ export default class RegistrationForm extends Component {
 
     this.setState({ error: null })
 
-    AuthApiService.postUser(newUser)
-    .then(res => {
-      return AuthApiService.postLogin({
-        user_name: newUser.user_name, 
-        password: newUser.password
-      })
-        .then(result => {
-          this.props.handleSetUser(user_name.value, 1000)
-          full_name.value = ''
-          nick_name.value = ''
-          user_name.value = ''
-          password.value = ''
-          this.props.onRegistrationSuccess()
+    const passwordError = this.validatePassword(newUser.password)
+    // Check for valide password before proceeding with POST request
+    if (!passwordError) {
+
+      AuthApiService.postUser(newUser)
+      .then(res => {
+        return AuthApiService.postLogin({
+          user_name: newUser.user_name, 
+          password: newUser.password
         })
-    })
-    .catch(res => {
-      this.setState({ error: res.error })
-    })
-  }
+          .then(result => {
+            this.props.handleSetUser(user_name.value, 1000)
+            full_name.value = ''
+            nick_name.value = ''
+            user_name.value = ''
+            password.value = ''
+            this.props.onRegistrationSuccess()
+          })
+      })
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
+    } else {
+      this.setState({ error: passwordError })
+    }
+} 
   render() {
     const { error } = this.state
     return (

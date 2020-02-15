@@ -1,17 +1,24 @@
 .bet_controls {
   display: flex;
+  position: relative;
+  left: -8px;
+}
+
+.bet_control {
+  display: flex;
 }
 
 .bet_control button {
   display: block;
   font: inherit;
-  padding: 5px;
-  margin: 0 5px;
-  width: 25px;
-  height: 25px;
+  margin: 0 2px;
+  width: 30px;
+  height: 35px;
   border: 1px solid rgb(77, 76, 75);
   cursor: pointer;
   line-height: 0px;
+  position: relative;
+  top: 3px
 }
 
 .bet_control button:disabled {
@@ -87,10 +94,25 @@
 }
 
 @media only screen and (min-width: 500px) {
+  .bet_control {
+    display: block;
+    position: static;
+    left: 0px;
+  }
+
+  .bet_control button {
+    display: block;
+    font: inherit;
+    margin: 0 5px;
+    height: 30px;
+    border: 1px solid rgb(77, 76, 75);
+  }
+  
+
   .chip {
-    height: 55px;
-    width: 55px;
-    line-height: 40px;
+    height: 60px;
+    width: 60px;
+    line-height: 50px;
     font-size: small;
   }
   

@@ -15,7 +15,7 @@ export default function DealerBox(props) {
       cards.push(
         <div className={`cards`}>
           <Card key={`box-dealer_card-1`} value={value} suit={suit} id={1}/>
-          <div className={`card-2 back-card-outer card`}></div>
+          <div className={`card-2 back-card-outer card`}></div> {/* Dealers 2nd card is hiden*/}
         </div>
       )
     } else {

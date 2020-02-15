@@ -1,7 +1,9 @@
 import React from 'react';
 import './PlayerControls.css';
 import TableContext from '../TableContext';
-
+// component deals with the logic of rendering game controls. Double and Surrender only
+// available on players first action of each hand (player has only two cards). 
+// Hit and stand for each "open box"
 
 export default class PlayerControls extends React.Component {
   static contextType = TableContext;
@@ -29,12 +31,6 @@ export default class PlayerControls extends React.Component {
               {
                 controls.push(<button className="action" onClick={() => this.context.double(activeBoxIndex)}>DOUBLE</button>);
               }
-            // Split function to be added at a later stage
-
-            // if (activeBox.cards[0].slice(0,-1) === activeBox.cards[1].slice(0,-1) ) 
-            //   {
-            //     controls.push(<button className="action" onClick={() => this.context.split}>SPLIT</button>);
-            //   }
           }
       } 
     else if ((this.props.handStarted) && (this.context.openBoxes.length > 0))
