@@ -4,11 +4,11 @@ import Card from '../Cards/Card/Card';
 import './DealerBox.css';
 
 export default function DealerBox(props) {
-  const result = props.box.result? props.box.result: null;
+  const result = props.box? props.box.result: null;
 
   let cards = []
   if (props.box.cards)  {
-    if (props.box.cards.length === 2 && props.hideCard) {
+    if (props.box.cards.length === 2 && props.box.hideCard) {
       const card = props.box.cards[0]
       const value = card.slice(0,-1)
       const suit = card.slice(-1)
@@ -19,7 +19,7 @@ export default function DealerBox(props) {
         </div>
       )
     } else {
-        cards.push(<Cards cards={props.box.cards} boxId={"dealer"}/>)
+        cards.push(<Cards key={"dealer"} cards={props.box.cards} boxId={"dealer"}/>)
       }
     }   
 

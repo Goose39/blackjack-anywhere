@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { withRouter } from "react-router";
 import './App.css';
-import { CreateShoe, HandTotal, shuffle } from './store';
+import { createShoe, handTotal, shuffle } from './store';
 import Welcome from './Welcome/Welcome';
 import TableContext from './TableContext';
 import Table from './Table/Table';
@@ -113,7 +113,7 @@ class App extends React.Component {
   
   resetShoe = () => {
     const decks = this.state.decks
-    const shoe = CreateShoe(decks);
+    const shoe = createShoe(decks);
     return shuffle(shoe)
   }
 
@@ -126,7 +126,7 @@ class App extends React.Component {
     
     box.cards.push(`${nextCard}`);
 
-    if (HandTotal(box.cards) > 21 ) {
+    if (handTotal(box.cards) > 21 ) {
       box.result = 'Bust';
       box.payout = 0;
 
@@ -134,7 +134,7 @@ class App extends React.Component {
         playerBoxes: updatedPlayerBoxes,
         shoe: newShoe
         }, this.stand(boxIndex))
-    } else if (HandTotal(box.cards) === 21) {
+    } else if (handTotal(box.cards) === 21) {
         this.setState ({
         playerBoxes: updatedPlayerBoxes,
         shoe: newShoe
@@ -151,7 +151,7 @@ class App extends React.Component {
     const updatedPlayerBoxes = [ ...this.state.playerBoxes ];
     updatedPlayerBoxes[boxIndex].stand = true;
     updatedPlayerBoxes[boxIndex].active = false;
-    updatedPlayerBoxes[boxIndex].total = HandTotal(updatedPlayerBoxes[boxIndex].cards)
+    updatedPlayerBoxes[boxIndex].total = handTotal(updatedPlayerBoxes[boxIndex].cards)
 
     //update state to reflect that player STANDS on a given box and no more cards should be dealt to that box.
     this.setState ({
@@ -226,7 +226,7 @@ class App extends React.Component {
     let balance = this.state.balance
 
     updatedPlayerBoxes.forEach(box => {
-      box.total = HandTotal(box.cards)
+      box.total = handTotal(box.cards)
       if ((box.cards.length === 2) && (box.total === 21)) {
         box.result = "Blackjack!";
         box.stand = true;
@@ -350,14 +350,14 @@ class App extends React.Component {
   resultDealerHand = () => {
     const dealerBox = {...this.state.dealerBox};
     const newShoe = [...this.state.shoe];
-    dealerBox.total = HandTotal(dealerBox.cards);
+    dealerBox.total = handTotal(dealerBox.cards);
     dealerBox.hideCard = false;
 
     while (dealerBox.total < 17) {
       // const nextCard = newShoe.shift();
       const nextCard = newShoe.shift();
       dealerBox.cards.push(nextCard);
-      dealerBox.total = HandTotal(dealerBox.cards);
+      dealerBox.total = handTotal(dealerBox.cards);
     }
 
     if (dealerBox.total > 21) {
@@ -502,7 +502,6 @@ class App extends React.Component {
                               handStarted={this.state.handStarted}
                               nextHand={() => this.resetHand()}
                               resetBalance={() => this.resetBalance()}
-                              hideCard={this.state.dealerBox.hideCard}
                             />}
             />
           </Switch>

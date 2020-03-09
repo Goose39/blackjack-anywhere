@@ -5,6 +5,7 @@ const TableContext = React.createContext( {
   dealer: [],
   playerBoxes: [],
   activeBox: {},
+  openBoxes: [],
   nextCard: () => {},
   hit: () => {},
   stand: () => {},

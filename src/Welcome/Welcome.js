@@ -25,7 +25,7 @@ export default class Welcome extends React.Component {
       <header role="banner">
         <h1 className="app_name">Blackjack Anywhere</h1>
       </header>
-      <section class="welcome">
+      <section className="welcome">
         <div className="left_sidebar">
           <img src={spade} className="suit_sidebar" alt="spade symbol"></img>
           <img src={heart} className="suit_sidebar" alt="heart symbol"></img>

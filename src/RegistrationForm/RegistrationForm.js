@@ -11,7 +11,7 @@ export default class RegistrationForm extends Component {
   state = { error: null }
   // Password Validation before sending request to server
   validatePassword = password => {
-    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
+    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/
 
     if (password.length < 8) {
       return 'Password must be at least 8 characters'
