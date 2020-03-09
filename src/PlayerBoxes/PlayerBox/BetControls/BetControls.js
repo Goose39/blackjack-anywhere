@@ -26,9 +26,9 @@ export default class BetControls extends React.Component {
       value: 100000,
       color: 'red'
       }];
-    const balance = this.context.balance;
-    const boxBet = this.context.playerBoxes[this.props.boxId-1].bet
+    const balance = this.context.balance? this.context.balance: null;
     const betsOnTable = this.context.playerBoxes? this.context.playerBoxes.map(box => box.bet): [];
+    const boxBet = betsOnTable[this.props.boxId-1]? betsOnTable[this.props.boxId-1]: 0;
     const bigBetOnTable = betsOnTable !== []? Math.max(...betsOnTable): 0;
     let disableButtonCheck = false;
     const controls = chips.map((chip) => {

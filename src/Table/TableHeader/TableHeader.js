@@ -57,9 +57,9 @@ export default class TableHeader extends React.Component {
           
           {!this.props.handStarted?    
             (<div className='burger_icon'>
-                <button class={`hamburger hamburger--squeeze${this.state.burgerButtonClass}`} type="button" onClick={() => this.burgerHandler()}>
-                  <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
+                <button className={`hamburger hamburger--squeeze${this.state.burgerButtonClass}`} type="button" onClick={() => this.burgerHandler()}>
+                  <span className="hamburger-box">
+                    <span className="hamburger-inner"></span>
                   </span>
                 </button>
               </div>)

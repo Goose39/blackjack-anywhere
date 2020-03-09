@@ -1,5 +1,5 @@
-// CreateShoe, creates array of all cards. Using number of decks player has selected
-export const CreateShoe = (decks) => {
+// Creates array of all cards. Using number of decks player has selected
+export const createShoe = (decks) => {
   const suits = ['h', 'd', 'c', 's']
   const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
   const shoe = []
@@ -37,7 +37,7 @@ export const sliceCard = (card) => {
   return { symbol: cardSymbol, suit: cardSuit }
 }
 // Works out totals of each hands card combination
-export const HandTotal = (cards) => {
+export const handTotal = (cards) => {
   const cardValues = [
     {symbol: '2', value: 2},
     {symbol: '3', value: 3},
