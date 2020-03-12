@@ -1,6 +1,7 @@
 import React from 'react';
 
-const TableContext = React.createContext( {
+const TableContext = React.createContext( 
+  {
   decks: null, 
   dealer: [],
   playerBoxes: [],
@@ -13,6 +14,7 @@ const TableContext = React.createContext( {
   double: () => {},
   addBet: () => {},
   removeBet: () => {}
-} )
+  }
+);
 
 export default TableContext;

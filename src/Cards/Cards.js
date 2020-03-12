@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card/Card';
-import HandCount from './HandCount/HandCount'
+import HandCount from './HandCount/HandCount';
 import './Cards.css';
 
 export default function Cards(props) {
@@ -25,4 +25,4 @@ export default function Cards(props) {
       </div>
     </>
   );
-}
+};

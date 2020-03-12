@@ -6,4 +6,4 @@ it('renders without errors', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Welcome />, div);
   ReactDOM.unmountComponentAtNode(div);
-})
+});

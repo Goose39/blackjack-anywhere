@@ -13,4 +13,4 @@ it('renders without errors', () => {
       boxId={1} 
     />, div);
   ReactDOM.unmountComponentAtNode(div);
-})
+});

@@ -2,7 +2,7 @@
 /*
   Idle Service
 
-  this service manages when a user has gone idle (not interacting with the page).
+  this service manages when a user has gone idle (i.e. not interacting with the page).
 */
 
 let _timeoutId
@@ -35,6 +35,6 @@ const IdleService = {
       document.removeEventListener(event, IdleService.resetIdleTimer, true)
     )
   },
-}
+};
 
-export default IdleService
+export default IdleService;

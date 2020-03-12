@@ -36,6 +36,6 @@ const AuthApiService = {
         return res
       })
   },
-}
+};
 
-export default AuthApiService
+export default AuthApiService;

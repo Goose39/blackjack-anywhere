@@ -20,4 +20,4 @@ it('renders without errors', () => {
       resetBalance={() => this.resetBalance()}
     />, div);
   ReactDOM.unmountComponentAtNode(div);
-})
+});

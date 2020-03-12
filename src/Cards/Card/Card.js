@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Club from '../../assets/images/suits/c.png'
-import Diamond from '../../assets/images/suits/d.png'
-import Spade from '../../assets/images/suits/s.png'
-import Heart from '../../assets/images/suits/h.png'
+import Club from '../../assets/images/suits/c.png';
+import Diamond from '../../assets/images/suits/d.png';
+import Spade from '../../assets/images/suits/s.png';
+import Heart from '../../assets/images/suits/h.png';
 import './Card.css';
 
 export default function Card(props) {
@@ -14,7 +14,7 @@ export default function Card(props) {
     { id: "h", src: Heart, title: 'diamond', alt: 'diamond' }
   ];
 
-  const cardClass = ((props.id > 1) ? " card": "")
+  const cardClass = ((props.id > 1) ? " card": "");
   const srcIdx = imageStore.findIndex(x => x.id === props.suit);
 
   return (

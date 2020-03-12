@@ -26,10 +26,12 @@ export default class RegistrationForm extends Component {
       return 'Password must contain one upper case, lower case, number and special character'
     }
     return null
-  }
+  };
 
   handleSubmit = ev => {
     ev.preventDefault()
+    // Disable button on 1st click, users may click twice due to slow server response time.
+    document.getElementById("register").disabled = true;
     TokenService.clearAuthToken();
     const { full_name, nick_name, user_name, password } = ev.target
     const newUser = { full_name: full_name.value, nick_name: nick_name.value, user_name: user_name.value, password: password.value }
@@ -37,7 +39,7 @@ export default class RegistrationForm extends Component {
     this.setState({ error: null })
 
     const passwordError = this.validatePassword(newUser.password)
-    // Check for valide password before proceeding with POST request
+    // Check for valid password before proceeding with POST request
     if (!passwordError) {
 
       AuthApiService.postUser(newUser)
@@ -61,7 +63,7 @@ export default class RegistrationForm extends Component {
     } else {
       this.setState({ error: passwordError })
     }
-} 
+};
   render() {
     const { error } = this.state
     return (
@@ -116,10 +118,10 @@ export default class RegistrationForm extends Component {
             id='RegistrationForm__nick_name'>
           </Input>
         </div>
-        <Button type='submit'>
+        <Button id='register' type='submit'>
           Register
         </Button>
       </form>
     )
-  }
-}
+  };
+};

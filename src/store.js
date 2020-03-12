@@ -1,20 +1,20 @@
 // Creates array of all cards. Using number of decks player has selected
 export const createShoe = (decks) => {
-  const suits = ['h', 'd', 'c', 's']
-  const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-  const shoe = []
+  const suits = ['h', 'd', 'c', 's'];
+  const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+  const shoe = [];
   const deck = suits.map(suit => values.map( value => `${value}${suit}`)).flat();
 
   for (let i=1; i <= decks; i++) {
     shoe.push(deck);
-  }
+  };
   
   return shoe.flat();
 }
 // RNG
 const randNo = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
- }
+ };
 
  // Shuffles all cards in the shoe
 export const shuffle = (shoe) => {
@@ -25,17 +25,17 @@ export const shuffle = (shoe) => {
     const randCardLocation = randNo(shoeSize);
     newShoe.push(shoe[randCardLocation]);
     shoe.splice(randCardLocation, 1);
-  }
+  };
 
-  return newShoe
-}
+  return newShoe;
+};
 // Slices cards to get value and symbol 
 export const sliceCard = (card) => {
   const cardSymbol = card.slice(0,-1);
   const cardSuit = card[-1];
   
-  return { symbol: cardSymbol, suit: cardSuit }
-}
+  return { symbol: cardSymbol, suit: cardSuit };
+};
 // Works out totals of each hands card combination
 export const handTotal = (cards) => {
   const cardValues = [
@@ -52,7 +52,7 @@ export const handTotal = (cards) => {
     {symbol: 'Q', value: 10},
     {symbol: 'K', value: 10},
     {symbol: 'A', value: 11}
-  ]
+  ];
 
   let hasA = false;
 
@@ -79,8 +79,8 @@ export const handTotal = (cards) => {
       sum = totals.reduce(( a, b ) => a + b);
       // Reset Index location of Ace, in order to check for next A
       aceIndex = -1;
-    } else hasA = false 
-  } 
+    } else hasA = false;
+  };
 
-  return sum
-}
+  return sum;
+};

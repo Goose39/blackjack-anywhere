@@ -41,7 +41,7 @@ export default class PlayerControls extends React.Component {
           controls.push(<button className="action wide" onClick={() => this.props.resetBalance()}>RESET BALANCE</button>);
         }
         
-      }
+      };
 
     return (
       <section className="controls">
@@ -50,5 +50,5 @@ export default class PlayerControls extends React.Component {
         </div>
       </section>
     )
-    }
-}
+    };
+};

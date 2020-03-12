@@ -8,6 +8,7 @@
 #box-1, #box-5, #box-2, #box-4 {
   display: none;
 }
+
 #box-1, #box-5 {
   margin-bottom: 50px;
 }
@@ -17,14 +18,15 @@
 }
 
 #box-3 {
-  margin-bottom: 0px
+  margin-bottom: 0px;
 }
 
 @media only screen and (min-width: 500px) {
 
   #box-2, #box-4 {
-  display: block
+  display: block;
   }
+
 }
 
 @media only screen and (min-width: 1100px) {
@@ -32,6 +34,7 @@
   #box-1, #box-5 {
     display: block; 
   }
+
 }
 
 

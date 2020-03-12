@@ -16,10 +16,10 @@ it('renders without errors', () => {
       result: "",
       active: false
     }
-  ]
+  ];
   ReactDOM.render(
     <PlayerBoxes 
       boxes={playerBoxes} 
       handStarted={false}/>, div);
   ReactDOM.unmountComponentAtNode(div);
-})
+});

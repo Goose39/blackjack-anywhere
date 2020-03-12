@@ -10,4 +10,4 @@ it('renders without errors', () => {
     nextHand={() => {}} 
     resetBalance={() => {}}/>, div);
   ReactDOM.unmountComponentAtNode(div);
-})
+});

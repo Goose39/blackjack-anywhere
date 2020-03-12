@@ -9,9 +9,9 @@ export default class LoginForm extends Component {
   static defaultProps = {
     onLoginSuccess: () => {}, 
     handleSetUser: () => {}
-  }
+  };
 
-  state = { error: null }
+  state = { error: null };
 
   handleSubmitJwtAuth = ev => {
     ev.preventDefault()
@@ -37,7 +37,7 @@ export default class LoginForm extends Component {
       .catch(res => {
         this.setState({ error: res.error })
       })
-  }
+  };
 
   render() {
     const { error } = this.state
@@ -75,5 +75,5 @@ export default class LoginForm extends Component {
         </Button>
       </form>
     )
-  }
-}
+  };
+};

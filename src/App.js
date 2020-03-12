@@ -97,24 +97,24 @@ class App extends React.Component {
           balance: balance
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
       
     } else {
       this.setState({
         user: "Guest", 
         balance: 500
-      })
-    }
+      });
+    };
 
     const shuffledShoe = this.resetShoe();
-    this.setState ({ shoe: shuffledShoe })
+    this.setState ({ shoe: shuffledShoe });
   }
 
   
   resetShoe = () => {
-    const decks = this.state.decks
+    const decks = this.state.decks;
     const shoe = createShoe(decks);
-    return shuffle(shoe)
+    return shuffle(shoe);
   }
 
   hit = (boxIndex) => {
@@ -122,7 +122,7 @@ class App extends React.Component {
     const nextCard = newShoe.shift();
 
     const updatedPlayerBoxes = [...this.state.playerBoxes];
-    const box = updatedPlayerBoxes[boxIndex]
+    const box = updatedPlayerBoxes[boxIndex];
     
     box.cards.push(`${nextCard}`);
 
@@ -144,26 +144,29 @@ class App extends React.Component {
         playerBoxes: updatedPlayerBoxes,
         shoe: newShoe
         })
-      }
-  }
+      };
+  };
 
   stand = (boxIndex) => {
     const updatedPlayerBoxes = [ ...this.state.playerBoxes ];
     updatedPlayerBoxes[boxIndex].stand = true;
     updatedPlayerBoxes[boxIndex].active = false;
-    updatedPlayerBoxes[boxIndex].total = handTotal(updatedPlayerBoxes[boxIndex].cards)
+    updatedPlayerBoxes[boxIndex].total = handTotal(updatedPlayerBoxes[boxIndex].cards);
 
     //update state to reflect that player STANDS on a given box and no more cards should be dealt to that box.
     this.setState ({
       playerBoxes: updatedPlayerBoxes, 
-    })
+    });
     //Set next box to active
-    this.setActiveBox(boxIndex + 1)
+    this.setActiveBox(boxIndex + 1);
   }
 
   updateDecks = (decks) => {
-    this.setState({ decks: decks })
-  }
+    if ( decks < 1 ) {
+      decks = 1
+    };
+    this.setState({ decks: decks });
+  };
   // reset all previous hand values and enable betting for next hand 
   resetHand = () => {
     const shoe = this.resetShoe();
@@ -185,7 +188,7 @@ class App extends React.Component {
       box.result = "";
       box.active = false;
       return box
-    })
+    });
 
     this.setState({
       openBoxes: [],
@@ -196,8 +199,8 @@ class App extends React.Component {
       },
       handStarted: false,
       shoe: shoe
-    })
-  }
+    });
+  };
   // deal first two cards to all open boxes (with bets) and dealers box
   deal = () => {
     const newShoe = [...this.state.shoe];
@@ -214,28 +217,28 @@ class App extends React.Component {
           // const nextCard = this.getNextCard()
           const nextCard = newShoe.shift();
           box.cards.push(nextCard);
-        } 
-        return box
-      })
+        } ;
+        return box;
+      });
       //Deal Dealer a card
       const nextCard = newShoe.shift();
-      updatedDealerBox.cards.push(nextCard)
+      updatedDealerBox.cards.push(nextCard);
     }
 
     // Check for Blackjack
     let balance = this.state.balance
 
     updatedPlayerBoxes.forEach(box => {
-      box.total = handTotal(box.cards)
+      box.total = handTotal(box.cards);
       if ((box.cards.length === 2) && (box.total === 21)) {
         box.result = "Blackjack!";
         box.stand = true;
         box.payout = box.bet * 5/2;
         balance += box.payout;
-      }
-    })
+      };
+    });
 
-    const firstOpenBox = updatedOpenBoxes[0]
+    const firstOpenBox = updatedOpenBoxes[0];
 
     //Update state with all cards dealt and Open boxes
     this.setState({
@@ -250,26 +253,26 @@ class App extends React.Component {
   }
 
   double = (boxIndex) => {
-    this.hit(boxIndex)
+    this.hit(boxIndex);
     let balance = this.state.balance;
-    const updatedPlayerBoxes = [...this.state.playerBoxes]
-    balance -= updatedPlayerBoxes[boxIndex].bet
+    const updatedPlayerBoxes = [...this.state.playerBoxes];
+    balance -= updatedPlayerBoxes[boxIndex].bet;
     updatedPlayerBoxes[boxIndex].bet *= 2;
 
     this.setState({
       balance: balance,
       playerBoxes: updatedPlayerBoxes
       }, () => {this.stand(boxIndex);}
-    )
-  }
+    );
+  };
 
   surrender = (boxIndex) => {
-    const updatedPlayerBoxes = [...this.state.playerBoxes]
+    const updatedPlayerBoxes = [...this.state.playerBoxes];
     updatedPlayerBoxes[boxIndex].payout = updatedPlayerBoxes[boxIndex].bet/2;
     updatedPlayerBoxes[boxIndex].bet = null; 
     updatedPlayerBoxes[boxIndex].result = "SURRENDER";
     let balance = this.state.balance;
-    balance += updatedPlayerBoxes[boxIndex].payout
+    balance += updatedPlayerBoxes[boxIndex].payout;
     
 
     this.setState({
@@ -277,7 +280,7 @@ class App extends React.Component {
       balance: balance
     }, () => {this.setActiveBox(boxIndex + 1);}
     )
-  }
+  };
   // Set next open box to active box
   setActiveBox = (boxIndex) => {   
     const updatedPlayerBoxes = [...this.state.playerBoxes]
@@ -300,7 +303,7 @@ class App extends React.Component {
         activeBox: { id:  undefined},
       }, () => {this.resultDealerHand();})
     }
-}
+  };
 
   addBetHandler = (boxId, bet) => {
     const boxIndex = boxId - 1;
@@ -374,7 +377,7 @@ class App extends React.Component {
   playerPayout = () => {
 
     const playerBoxes = [...this.state.playerBoxes];
-    const dealer = {...this.state.dealerBox}
+    const dealer = {...this.state.dealerBox};
     let balance = this.state.balance;
 
     const updatedPlayerBoxes = playerBoxes.map(box => {
@@ -400,7 +403,7 @@ class App extends React.Component {
         } 
 
         return box
-    })
+    });
 
     if (TokenService.hasAuthToken()) {
       const { sub } = TokenService.readJwtToken()
@@ -416,9 +419,9 @@ class App extends React.Component {
       this.setState({ 
         playerBoxes: updatedPlayerBoxes,
         balance: balance
-      })
-    }
-  }
+      });
+    };
+  };
 
   resetBalance = () => {
     if (TokenService.hasAuthToken()) {
@@ -441,20 +444,20 @@ class App extends React.Component {
     this.setState({
       user: user,
       balance: balance
-    })
-  }
+    });
+  };
 
   logoutUserHandler = () => {
-    TokenService.clearAuthToken()
+    TokenService.clearAuthToken();
     /* when logging out, clear the callbacks to the refresh api and idle auto logout */
-    TokenService.clearCallbackBeforeExpiry()
-    IdleService.unRegisterIdleResets()
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
     this.setState({
       user: "Guest",
       balance: 500
-    })
-    this.props.history.push('/')
-  }
+    });
+    this.props.history.push('/');
+  };
 
   render() {
     const value = {

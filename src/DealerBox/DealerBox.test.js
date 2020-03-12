@@ -17,4 +17,4 @@ it('renders without errors', () => {
       hideCard={dealerBox.hideCard} 
     />, div);
   ReactDOM.unmountComponentAtNode(div);
-})
+});

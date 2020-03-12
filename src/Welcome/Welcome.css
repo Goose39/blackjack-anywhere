@@ -2,6 +2,7 @@ form {
   padding-top: 25px;
   background-color: white;
 }
+
 .welcome {
   display: flex;
   max-width: 1200px;
@@ -72,6 +73,7 @@ form {
     display: flex;
     flex-direction: column;
   }
+
 }
 
 @media only screen and (min-width: 1000px) {

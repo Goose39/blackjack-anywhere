@@ -1,5 +1,5 @@
-import config from '../config'
-import TokenService from './token-service'
+import config from '../config';
+import TokenService from './token-service';
 
 const BalanceService = {
   getBalance(user_name) {
@@ -37,6 +37,6 @@ const BalanceService = {
         return res
         })
   },
-}
+};
 
-export default BalanceService
+export default BalanceService;

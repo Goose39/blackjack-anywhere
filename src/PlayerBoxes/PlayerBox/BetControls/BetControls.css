@@ -5,7 +5,9 @@
 }
 
 @media only screen and (min-width: 500px) {
+  
   .bet_controls_box {
     margin-top: -10px;
   }
+
 }

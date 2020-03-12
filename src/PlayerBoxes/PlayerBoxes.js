@@ -21,7 +21,7 @@ export default function PlayerBoxes(props) {
               active={box.active}
             />
     }) 
-    : null
+    : null;
 
   return (
     <section className="player-section">
@@ -29,5 +29,5 @@ export default function PlayerBoxes(props) {
      { boxes }
     </div>
   </section>
-  )
-}
+  );
+};

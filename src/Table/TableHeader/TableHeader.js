@@ -9,7 +9,7 @@ export default class TableHeader extends React.Component {
     switchUser: false,
     activeBurger: false,
     burgerButtonClass: "",
-  }
+  };
 
   updateSwitchUserHandler = () => {
     const newVal = !this.state.switchUser 
@@ -17,7 +17,7 @@ export default class TableHeader extends React.Component {
     this.setState({
       switchUser: newVal
     })
-  }
+  };
 
   burgerHandler = () => {
     const newVal = !this.state.activeBurger 
@@ -25,13 +25,13 @@ export default class TableHeader extends React.Component {
     
     if (newVal) {
       burgerButtonClass = ' is-active'
-    }
+    };
 
     this.setState({
       activeBurger: newVal,
       burgerButtonClass: burgerButtonClass
     })
-  }
+  };
 
 
 
@@ -72,5 +72,5 @@ export default class TableHeader extends React.Component {
         {this.state.activeBurger? <BurgerMenu decks={this.props.decks} updateDecks={this.props.updateDecks} />: null }
       </>
     )
-  }
-}
+  };
+};

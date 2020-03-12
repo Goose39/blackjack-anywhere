@@ -11,13 +11,13 @@ import RegistrationFrom from '../RegistrationForm/RegistrationForm'
 export default class Welcome extends React.Component {
   state = {
     formOption: ''
-  }
-
+  };
+  // Display Selected Form
   setFrom = (form) => {
     this.setState({
       formOption: form
     })
-  }
+  };
 
   render() {
     return (
@@ -38,7 +38,7 @@ export default class Welcome extends React.Component {
             <p>Start by creating an account by clicking on "Register Below"</p>
             <p>Once you have created an account you will be seated at the table with a starting account balance of $1,000</p>
             <p>If you would prefer to play as a Guest, click "Login as Guest" and you will be seated at the table with a starting account balance of $500</p>
-            <p>As a Guest you will not be able to save your account balance to play wih later.</p>
+            <p>As a Guest you will not be able to save your account balance to play with later.</p>
             <p>If you already have an account setup, you can login as usual.</p>
             <p>GOOD LUCK!</p>
           </div>
@@ -58,5 +58,5 @@ export default class Welcome extends React.Component {
       </section>
     </>
     )
-  }
-}
+  };
+};

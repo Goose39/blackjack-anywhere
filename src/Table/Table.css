@@ -11,7 +11,7 @@
   color: white;
   background-color: rgb(0, 0, 0);
   position: relative;
-} 
+}
 
 .result {
   bottom: 160px;
@@ -26,9 +26,5 @@
   .result {
     bottom: 180px;
   }
-}
-
-@media only screen and (min-width: 1100px) {
-
- 
+  
 }

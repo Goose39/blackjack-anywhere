@@ -11,11 +11,9 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 @media only screen and (min-width: 500px) {
+
   .deck_control {
     display: block;
   }
-}
-
-@media only screen and (min-width: 1100px) {
-
+  
 }
